@@ -12,10 +12,7 @@ fetch(stockCameras).then((response) =>
     // Définition du container des "cards" des produits
     const container = document.getElementById("productsStack");
     data.forEach((item) => {
-      //create a card
-      const card = document.createElement("div");
-      card.classList = "col-md-6 col-lg-3";
-
+     
       //Construction de la carte
       const content = `
       <div class="col-md-6 col-lg-3">
@@ -38,7 +35,9 @@ fetch(stockCameras).then((response) =>
         </div>
         </div>
         </div>
+        </div>
             `;
+
       container.innerHTML += content;
     });
   })
