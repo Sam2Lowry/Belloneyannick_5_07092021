@@ -1,0 +1,100 @@
+
+<div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img
+                  src="https://source.unsplash.com/300x300/?camera"
+                  class="rounded-circle mb-3 img-fluid"
+                  alt=""
+                />
+                <h3 class="card-title mb-3">Nikon D7</h3>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
+                </p>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <div>
+                  <button class="btn-dark mt-3">Voir le produit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img
+                  src="https://source.unsplash.com/300x300/?camera"
+                  class="rounded-circle mb-3 img-fluid"
+                  alt=""
+                />
+                <h3 class="card-title mb-3">Leica For7</h3>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
+                </p>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <div>
+                  <button class="btn-dark mt-3">Voir le produit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img
+                  src="https://source.unsplash.com/300x300/?camera"
+                  class="rounded-circle mb-3 img-fluid"
+                  alt=""
+                />
+                <h3 class="card-title mb-3">Sony W4</h3>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
+                </p>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-half text-dark mx-1"></i></a>
+                <div>
+                  <button class="btn-dark mt-3">Voir le produit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <img
+                  src="https://source.unsplash.com/300x300/?camera"
+                  class="rounded-circle mb-3 img-fluid"
+                  alt=""
+                />
+                <h3 class="card-title mb-3">Canon M5</h3>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Assumenda accusamus nobis sed cupiditate iusto? Quibusdam.
+                </p>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star-fill text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-star text-dark mx-1"></i></a>
+                <div>
+                  <button class="btn-dark mt-3">Voir le produit</button>
+                </div>
+              </div>
+            </div>
+          </div>
