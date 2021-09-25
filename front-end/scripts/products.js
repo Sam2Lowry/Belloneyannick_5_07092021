@@ -36,7 +36,8 @@ fetch(stockCameras).then((response) =>
       <p class="card-text">${item.description}</p>
       ${star.repeat(getRandomInt(1,6))}
       <div>
-      <button class="btn-dark mt-3">Voir le produit</button>
+      <a href="cameras.html?${item._id}" class="btn-light mt-3">Voir le produit</a>
+      
       </div>
       </div>
       </div>
@@ -50,3 +51,4 @@ fetch(stockCameras).then((response) =>
   })
   .catch(err => alert(err))
 );
+
