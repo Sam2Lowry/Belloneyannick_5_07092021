@@ -38,6 +38,7 @@ const loadData = async () => {
     //Boucle for au sein de l'Array des Lenses
     for (var i = 0; i < options.length; i++) {
             var opt = options[i];
+            console.log(opt)
             var el = document.createElement("option");
             el.textContent = opt;
             el.value = opt;
