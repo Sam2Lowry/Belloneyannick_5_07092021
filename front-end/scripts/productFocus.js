@@ -8,7 +8,7 @@ function getParameter(parameterName) {
 }
 
 // Définition de l'ID du produit recherché par l'utilisateur
-let cameraId = getParameter("produit");
+const cameraId = getParameter("produit");
 console.log(cameraId);
 
 const cameraUrl = stockCameras + "/" + cameraId;
@@ -27,7 +27,9 @@ const loadData = async () => {
 
     //Injection des données de la promesse
     document.getElementById("price").textContent = `${productPrice}`;
-    document.getElementById("descriptionArea").textContent = `${data.description}`;
+    document.getElementById(
+      "descriptionArea"
+    ).textContent = `${data.description}`;
     document.getElementById("productName").textContent = `${data.name}`;
     document.getElementById("productImage").src = `${data.imageUrl}`;
 
@@ -49,5 +51,15 @@ const loadData = async () => {
     console.error(err);
   }
 };
-
 loadData();
+
+console.log("nous avons déjà cette valeure :" + " " + cameraId);
+
+function Purchase() {
+  var cameraLens = document.getElementById("lensesForm").value;
+  if (cameraLens == "Choisissez votre modèle") alert("Choisissez votre modèle");
+  else  console.log(cameraLens);
+        console.log(cameraId);
+        localStorage.setItem(cameraId, cameraLens);
+}
+
