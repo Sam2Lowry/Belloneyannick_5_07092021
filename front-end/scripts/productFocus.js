@@ -12,15 +12,30 @@ console.log(cameraId);
 const cameraUrl = stockCameras + "/" + cameraId;
 console.log(cameraUrl);
 
-// Fonction de chargement des data de l'appareil photo
+// fonction async de récupération des data
 const loadData = async () => {
     try{
         const res = await fetch(cameraUrl)
         const data = await res.json();
         console.log(data);
+      
+        //définition du prix de l'appareil photo
+        let productPrice = data.price / 100 + " "+ "euros"
+        console.log(productPrice);
+        
+        //Injection des données de la promesse        
+        document.getElementById("price").textContent = `${productPrice}`;
+        document.getElementById("descriptionArea").textContent = `${data.description}`;
+        document.getElementById("productName").textContent = `${data.name}`;
+        document.getElementById("productImage").src = `${data.imageUrl}`;
+
+        let selectLens = document.getElementById("lensesForm");
+      
+
     }catch(err){
         console.error(err);
     }
 };
-// execution de la fonction de chargement des data de l'appareil photo
+
 loadData();
+
