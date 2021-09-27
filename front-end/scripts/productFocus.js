@@ -34,12 +34,14 @@ const loadData = async () => {
     let selectLens = document.getElementById("lensesForm");
     let options = data.lenses;
     console.log(options);
+
+    //Boucle for au sein de l'Array des Lenses
     for (var i = 0; i < options.length; i++) {
-      var opt = options[i];
-      var el = document.createElement("option");
-      el.textContent = opt;
-      el.value = opt;
-      selectLens.appendChild(el);
+            var opt = options[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            selectLens.appendChild(el);
     }
   } catch (err) {
     console.error(err);
