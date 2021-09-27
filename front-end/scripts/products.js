@@ -29,7 +29,7 @@ fetch(stockCameras).then((response) =>
       <div class="card-body text-center">
       <img
       src="${item.imageUrl}"
-      class="rounded-circle mb-3 img-fluid"
+      class="rounded mb-3 img-fluid"
       alt=""
       />
       <h3 class="card-title mb-3">${item.name}</h3>

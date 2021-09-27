@@ -57,7 +57,7 @@ console.log("nous avons déjà cette valeure :" + " " + cameraId);
 
 function Purchase() {
   var cameraLens = document.getElementById("lensesForm").value;
-  if (cameraLens == "Choisissez votre modèle") alert("Choisissez votre modèle");
+  if (cameraLens == "Choisissez votre modèle") alert("Veuillez choisir votre modèle de focale");
   else  console.log(cameraLens);
         console.log(cameraId);
         localStorage.setItem(cameraId, cameraLens);
