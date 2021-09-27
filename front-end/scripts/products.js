@@ -14,10 +14,10 @@ function getRandomInt(min, max) {
 let star = '<i class="bi bi-star-fill text-dark mx-1"></i>';
 
 //Promesse d'obtention des data depuis l'api
-
 fetch(stockCameras).then((response) =>
   response.json().then((data) => {
     console.log(data);
+    
     // Définition du container des "cards" des produits
     const container = document.getElementById("productsStack");
     data.forEach((item) => {

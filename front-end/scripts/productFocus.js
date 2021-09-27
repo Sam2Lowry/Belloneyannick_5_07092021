@@ -1,3 +1,6 @@
+// redéfinition de l'API
+const stockCameras = "http://localhost:3000/api/cameras";
+
 // Fonction d'exploration des data URL
 function getParameter(parameterName) {
   let parameters = new URLSearchParams(window.location.search);
@@ -24,9 +27,7 @@ const loadData = async () => {
 
     //Injection des données de la promesse
     document.getElementById("price").textContent = `${productPrice}`;
-    document.getElementById(
-      "descriptionArea"
-    ).textContent = `${data.description}`;
+    document.getElementById("descriptionArea").textContent = `${data.description}`;
     document.getElementById("productName").textContent = `${data.name}`;
     document.getElementById("productImage").src = `${data.imageUrl}`;
 
@@ -37,12 +38,12 @@ const loadData = async () => {
 
     //Boucle for au sein de l'Array des Lenses
     for (var i = 0; i < options.length; i++) {
-            var opt = options[i];
-            console.log(opt)
-            var el = document.createElement("option");
-            el.textContent = opt;
-            el.value = opt;
-            selectLens.appendChild(el);
+      var opt = options[i];
+      console.log(opt);
+      var el = document.createElement("option");
+      el.textContent = opt;
+      el.value = opt;
+      selectLens.appendChild(el);
     }
   } catch (err) {
     console.error(err);
