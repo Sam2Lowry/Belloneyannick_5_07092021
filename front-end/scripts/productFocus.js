@@ -55,12 +55,11 @@ const loadData = async () => {
 loadData();
 
 
-function Purchase() {
+
+function addToCart() {
   var cameraLens = document.getElementById("lensesForm").value;
-  if (cameraLens == "Choisissez votre modèle") alert("Veuillez choisir votre modèle de focale");
-  else  console.log(cameraLens);
-        console.log(cameraId);
-        localStorage.setItem(cameraId, cameraLens);
+  if (cameraLens == "Veuillez choisir")
+    alert("Veuillez choisir votre modèle de focale");
+  else console.log(cameraLens);
+  console.log(cameraId);
 }
-
-
