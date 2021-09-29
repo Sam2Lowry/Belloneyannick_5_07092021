@@ -47,13 +47,13 @@ const loadData = async () => {
       el.value = opt;
       selectLens.appendChild(el);
     }
+    return productPrice;
   } catch (err) {
     console.error(err);
   }
 };
 loadData();
 
-console.log("nous avons déjà cette valeure :" + " " + cameraId);
 
 function Purchase() {
   var cameraLens = document.getElementById("lensesForm").value;
@@ -62,4 +62,5 @@ function Purchase() {
         console.log(cameraId);
         localStorage.setItem(cameraId, cameraLens);
 }
+
 
