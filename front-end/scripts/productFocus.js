@@ -1,5 +1,15 @@
-// redéfinition de l'API
+// Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
+
+eventListeners();
+
+//All event listeners
+function eventListeners() {
+  window.addEventListener("DOMContentLoaded", () => {
+    loadData();
+    purchase()
+  });
+}
 
 // Fonction d'exploration des data URL
 function getParameter(parameterName) {
@@ -19,6 +29,7 @@ const loadData = async () => {
   try {
     const res = await fetch(cameraUrl);
     const data = await res.json();
+
     console.log(data);
 
     //définition du prix de l'appareil photo
@@ -47,19 +58,17 @@ const loadData = async () => {
       el.value = opt;
       selectLens.appendChild(el);
     }
-    return productPrice;
   } catch (err) {
     console.error(err);
   }
 };
-loadData();
-
-
-
-function addToCart() {
-  var cameraLens = document.getElementById("lensesForm").value;
-  if (cameraLens == "Veuillez choisir")
-    alert("Veuillez choisir votre modèle de focale");
-  else console.log(cameraLens);
-  console.log(cameraId);
+function purchase() {
+  document.getElementById("purchaseBtn").addEventListener("click", function () {
+    console.log("clicked !!!!");
+    let product = document.getElementById("product")
+    console.log(product);
+  });
 }
+
+
+//getProductInfo(product);
