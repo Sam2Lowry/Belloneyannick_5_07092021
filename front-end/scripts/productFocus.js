@@ -1,7 +1,6 @@
 // Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
 
-
 eventListeners();
 
 //Classe de stockage du produit
@@ -13,10 +12,11 @@ class Product {
   }
 }
 
-//All event listeners
+//Event listeners
 function eventListeners() {
   window.addEventListener("DOMContentLoaded", () => {
     Purchase();
+    loadData();
   });
 }
 
@@ -73,34 +73,39 @@ const loadData = async () => {
 };
 
 function Purchase() {
-
+  //Event listener du bouton "commander"
   document.getElementById("purchaseBtn").addEventListener("click", function () {
-
-    var cameraLens = document.getElementById("lensesForm").value;
+    //récupération du modèle et de la focale
     var model = document.getElementById("productName").innerText;
+    var cameraLens = document.getElementById("lensesForm").value;
 
     //récupération du prix et transformation en chiffres
     var price = document.getElementById("price").innerText;
     var price = parseInt(price, 10);
-    const product = new Product(model, cameraLens, price);
-    console.log(product);
 
-    localStorage.setItem("cart", JSON.stringify(product));
-
-
-
-    
-    //button styling
+    //button var
     const button = document.getElementById("purchaseBtn");
+
+    //button styling
     button.textContent = "Et hop!";
     button.disabled = true;
     setTimeout(() => {
       button.textContent = "Commander";
       button.disabled = false;
-    }, 1500); 
-    
+    }, 1500);
 
+    //Création de l'objet à exporter dans le locale storage
+    const product = new Product(model, cameraLens, price);
+    console.log(product);
+
+    //Test présence de l'objet dans le locale storage
+    if (localStorage.getItem("cart") !== null) {
+      console.log("produit dans le panier");
+    } else {
+      localStorage.setItem("cart", JSON.stringify(product));
+      console.log("produit rajouté dans le panier");
+    }
   });
 }
 
-loadData();
+
