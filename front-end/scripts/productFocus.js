@@ -5,10 +5,11 @@ eventListeners();
 
 //Classe de stockage du produit
 class Product {
-  constructor(id, lens, price) {
+  constructor(id, lens, price, imageUrl) {
     this.id = id;
     this.lens = lens;
     this.price = price;
+    this.imageUrl = imageUrl;
   }
 }
 
@@ -82,6 +83,8 @@ function Purchase() {
     //récupération du prix et transformation en chiffres
     var price = document.getElementById("price").innerText;
     var price = parseInt(price, 10);
+    //récupération de la source de l'image
+    var imageUrl = document.getElementById("productImage").getAttribute("src");
 
     //button var
     const button = document.getElementById("purchaseBtn");
@@ -95,17 +98,20 @@ function Purchase() {
     }, 1500);
 
     //Création de l'objet à exporter dans le locale storage
-    const product = new Product(model, cameraLens, price);
+    const product = new Product(model, cameraLens, price, imageUrl);
     console.log(product);
 
+    //création d'un index
+    let d = new Date();
+    let productIndex = `prod${d.getTime()}`;
+    console.log(productIndex);
+
     //Test présence de l'objet dans le locale storage
-    if (localStorage.getItem("cart") !== null) {
+    if (localStorage.getItem(`"${productIndex}cart"`) !== null) {
       console.log("produit dans le panier");
     } else {
-      localStorage.setItem("cart", JSON.stringify(product));
+      localStorage.setItem(`"${productIndex}cart"`, JSON.stringify(product));
       console.log("produit rajouté dans le panier");
     }
   });
 }
-
-
