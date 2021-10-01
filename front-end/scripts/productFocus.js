@@ -1,13 +1,22 @@
 // Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
 
+
 eventListeners();
+
+//Classe de stockage du produit
+class Product {
+  constructor(id, lens, price) {
+    this.id = id;
+    this.lens = lens;
+    this.price = price;
+  }
+}
 
 //All event listeners
 function eventListeners() {
   window.addEventListener("DOMContentLoaded", () => {
-    loadData();
-    purchase()
+    Purchase();
   });
 }
 
@@ -62,13 +71,36 @@ const loadData = async () => {
     console.error(err);
   }
 };
-function purchase() {
+
+function Purchase() {
+
   document.getElementById("purchaseBtn").addEventListener("click", function () {
-    console.log("clicked !!!!");
-    let product = document.getElementById("product")
+
+    var cameraLens = document.getElementById("lensesForm").value;
+    var model = document.getElementById("productName").innerText;
+
+    //récupération du prix et transformation en chiffres
+    var price = document.getElementById("price").innerText;
+    var price = parseInt(price, 10);
+    const product = new Product(model, cameraLens, price);
     console.log(product);
+
+    localStorage.setItem("cart", JSON.stringify(product));
+
+
+
+    
+    //button styling
+    const button = document.getElementById("purchaseBtn");
+    button.textContent = "Et hop!";
+    button.disabled = true;
+    setTimeout(() => {
+      button.textContent = "Commander";
+      button.disabled = false;
+    }, 1500); 
+    
+
   });
 }
 
-
-//getProductInfo(product);
+loadData();
