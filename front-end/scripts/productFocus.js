@@ -114,6 +114,7 @@ function Purchase() {
       localStorage.setItem(`"${productIndex}cart"`, JSON.stringify(product));
       console.log("produit rajouté dans le panier");
     }
+    cartToken();
   });
 }
 
