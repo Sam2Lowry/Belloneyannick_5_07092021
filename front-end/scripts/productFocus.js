@@ -20,6 +20,8 @@ function eventListeners() {
     Purchase();
     loadData();
     cartToken();
+    toast();
+    
   });
 }
 
@@ -48,13 +50,14 @@ const loadData = async () => {
     let productPrice = data.price / 100 + " " + "euros";
     console.log(productPrice);
 
-    //Injection des données de la promesse
+    //Injection des données de la promesse dans le cadre de produit de la page
     document.getElementById("price").textContent = `${productPrice}`;
     document.getElementById(
       "descriptionArea"
     ).textContent = `${data.description}`;
     document.getElementById("productName").textContent = `${data.name}`;
     document.getElementById("productImage").src = `${data.imageUrl}`;
+   
 
     //définition des options dynamiques de focales pour les appareils photos
     let selectLens = document.getElementById("lensesForm");
@@ -120,7 +123,6 @@ function Purchase() {
     //Création de l'objet à exporter dans le locale storage
     const product = new Product(cameraId, model, cameraLens, price, imageUrl);
     console.log(product);
-    
 
     //création d'un index
     let d = new Date();
@@ -136,5 +138,20 @@ function Purchase() {
     }
     //mise à jour du token panier
     cartToken();
+    
   });
+}
+
+
+//Toast de confirmation de commande
+function toast() {
+  var toastTrigger = document.getElementById("purchaseBtn");
+  var toastLiveExample = document.getElementById("liveToast");
+  if (toastTrigger) {
+    toastTrigger.addEventListener("click", function () {
+      var toast = new bootstrap.Toast(toastLiveExample);
+      
+      toast.show();
+    });
+  }
 }
