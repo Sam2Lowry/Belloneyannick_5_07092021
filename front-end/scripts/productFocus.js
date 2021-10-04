@@ -18,6 +18,7 @@ function eventListeners() {
   window.addEventListener("DOMContentLoaded", () => {
     Purchase();
     loadData();
+    cartToken();
   });
 }
 
@@ -114,4 +115,20 @@ function Purchase() {
       console.log("produit rajouté dans le panier");
     }
   });
+}
+
+//Fonction de décompte des items dans le localStorage
+function cartToken() {
+  var cartCounter = 0;
+  cartCounter = localStorage.length;
+  
+  if (cartCounter === 0) {
+    document.getElementById(
+      "tokenCount"
+    ).textContent = "Panier vide";
+  } else {
+    document.getElementById(
+      "tokenCount"
+    ).textContent = `Panier (${cartCounter})`;
+  }
 }
