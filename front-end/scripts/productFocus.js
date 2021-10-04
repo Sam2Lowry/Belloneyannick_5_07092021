@@ -5,8 +5,8 @@ eventListeners();
 
 //Classe de stockage du produit
 class Product {
-  constructor(id, lens, price, imageUrl) {
-    this.id = id;
+  constructor(model, lens, price, imageUrl) {
+    this.model = model;
     this.lens = lens;
     this.price = price;
     this.imageUrl = imageUrl;
@@ -74,6 +74,20 @@ const loadData = async () => {
   }
 };
 
+//Fonction de décompte des items dans le localStorage
+function cartToken() {
+  var cartCounter = 0;
+  cartCounter = localStorage.length;
+
+  if (cartCounter === 0) {
+    document.getElementById("tokenCount").textContent = "Panier vide";
+  } else {
+    document.getElementById(
+      "tokenCount"
+    ).textContent = `Panier (${cartCounter})`;
+  }
+}
+
 function Purchase() {
   //Event listener du bouton "commander"
   document.getElementById("purchaseBtn").addEventListener("click", function () {
@@ -91,9 +105,13 @@ function Purchase() {
     const button = document.getElementById("purchaseBtn");
 
     //button styling
-    button.textContent = "Et hop!";
+    button.classList.remove("btn-warning");
+    button.classList.add("btn-success");
+    button.textContent = "Produit rajouté au panier";
     button.disabled = true;
     setTimeout(() => {
+      button.classList.remove("btn-success");
+      button.classList.add("btn-warning"); //
       button.textContent = "Commander";
       button.disabled = false;
     }, 1500);
@@ -114,22 +132,7 @@ function Purchase() {
       localStorage.setItem(`"${productIndex}cart"`, JSON.stringify(product));
       console.log("produit rajouté dans le panier");
     }
+    //mise à jour du token panier
     cartToken();
   });
-}
-
-//Fonction de décompte des items dans le localStorage
-function cartToken() {
-  var cartCounter = 0;
-  cartCounter = localStorage.length;
-  
-  if (cartCounter === 0) {
-    document.getElementById(
-      "tokenCount"
-    ).textContent = "Panier vide";
-  } else {
-    document.getElementById(
-      "tokenCount"
-    ).textContent = `Panier (${cartCounter})`;
-  }
 }
