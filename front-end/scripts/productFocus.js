@@ -5,7 +5,8 @@ eventListeners();
 
 //Classe de stockage du produit
 class Product {
-  constructor(model, lens, price, imageUrl) {
+  constructor(idModel, model, lens, price, imageUrl) {
+    this.idModel = idModel;
     this.model = model;
     this.lens = lens;
     this.price = price;
@@ -117,8 +118,9 @@ function Purchase() {
     }, 1500);
 
     //Création de l'objet à exporter dans le locale storage
-    const product = new Product(model, cameraLens, price, imageUrl);
+    const product = new Product(cameraId, model, cameraLens, price, imageUrl);
     console.log(product);
+    
 
     //création d'un index
     let d = new Date();
