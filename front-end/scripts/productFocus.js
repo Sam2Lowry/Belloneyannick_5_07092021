@@ -21,7 +21,6 @@ function eventListeners() {
     loadData();
     cartToken();
     toast();
-    
   });
 }
 
@@ -57,7 +56,6 @@ const loadData = async () => {
     ).textContent = `${data.description}`;
     document.getElementById("productName").textContent = `${data.name}`;
     document.getElementById("productImage").src = `${data.imageUrl}`;
-   
 
     //définition des options dynamiques de focales pour les appareils photos
     let selectLens = document.getElementById("lensesForm");
@@ -92,18 +90,23 @@ function cartToken() {
   }
 }
 
+// récupération des datas
+function dataRetrieval() {
+  //récupération du modèle et de la focale
+  var model = document.getElementById("productName").innerText;
+  var cameraLens = document.getElementById("lensesForm").value;
+
+  //récupération du prix et transformation en chiffres
+  var price = document.getElementById("price").innerText;
+  var price = parseInt(price, 10);
+  //récupération de la source de l'image
+  var imageUrl = document.getElementById("productImage").getAttribute("src");
+}
+
 function Purchase() {
   //Event listener du bouton "commander"
   document.getElementById("purchaseBtn").addEventListener("click", function () {
-    //récupération du modèle et de la focale
-    var model = document.getElementById("productName").innerText;
-    var cameraLens = document.getElementById("lensesForm").value;
-
-    //récupération du prix et transformation en chiffres
-    var price = document.getElementById("price").innerText;
-    var price = parseInt(price, 10);
-    //récupération de la source de l'image
-    var imageUrl = document.getElementById("productImage").getAttribute("src");
+    dataRetrieval();
 
     //button var
     const button = document.getElementById("purchaseBtn");
@@ -138,19 +141,22 @@ function Purchase() {
     }
     //mise à jour du token panier
     cartToken();
-    
   });
 }
-
 
 //Toast de confirmation de commande
 function toast() {
   var toastTrigger = document.getElementById("purchaseBtn");
   var toastLiveExample = document.getElementById("liveToast");
+
   if (toastTrigger) {
     toastTrigger.addEventListener("click", function () {
       var toast = new bootstrap.Toast(toastLiveExample);
-      
+      let model = document.getElementById("productName").innerText;
+      document.getElementById(
+        "toastName"
+      ).textContent = `${model} rajouté au panier`;
+
       toast.show();
     });
   }
