@@ -148,15 +148,12 @@ function Purchase() {
 function toast() {
   var toastTrigger = document.getElementById("purchaseBtn");
   var toastLiveExample = document.getElementById("liveToast");
-
   if (toastTrigger) {
+
     toastTrigger.addEventListener("click", function () {
       var toast = new bootstrap.Toast(toastLiveExample);
-      let model = document.getElementById("productName").innerText;
-      document.getElementById(
-        "toastName"
-      ).textContent = `${model} rajouté au panier`;
-
+      var model = document.getElementById("productName").innerText;
+      document.getElementById("toastName").textContent = `${model} rajouté avec succés`;
       toast.show();
     });
   }
