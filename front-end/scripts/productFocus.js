@@ -19,8 +19,8 @@ function eventListeners() {
   window.addEventListener("DOMContentLoaded", () => {
     Purchase();
     loadData();
-    cartToken();
     toast();
+    cartToken();
   });
 }
 
@@ -90,23 +90,18 @@ function cartToken() {
   }
 }
 
-// récupération des datas
-function dataRetrieval() {
-  //récupération du modèle et de la focale
-  var model = document.getElementById("productName").innerText;
-  var cameraLens = document.getElementById("lensesForm").value;
-
-  //récupération du prix et transformation en chiffres
-  var price = document.getElementById("price").innerText;
-  var price = parseInt(price, 10);
-  //récupération de la source de l'image
-  var imageUrl = document.getElementById("productImage").getAttribute("src");
-}
-
 function Purchase() {
   //Event listener du bouton "commander"
   document.getElementById("purchaseBtn").addEventListener("click", function () {
-    dataRetrieval();
+    //récupération du modèle et de la focale
+    var model = document.getElementById("productName").innerText;
+    var cameraLens = document.getElementById("lensesForm").value;
+
+    //récupération du prix et transformation en chiffres
+    var price = document.getElementById("price").innerText;
+    var price = parseInt(price, 10);
+    //récupération de la source de l'image
+    var imageUrl = document.getElementById("productImage").getAttribute("src");
 
     //button var
     const button = document.getElementById("purchaseBtn");
@@ -149,11 +144,12 @@ function toast() {
   var toastTrigger = document.getElementById("purchaseBtn");
   var toastLiveExample = document.getElementById("liveToast");
   if (toastTrigger) {
-
     toastTrigger.addEventListener("click", function () {
       var toast = new bootstrap.Toast(toastLiveExample);
-      var model = document.getElementById("productName").innerText;
-      document.getElementById("toastName").textContent = `${model} rajouté avec succés`;
+      let model = document.getElementById("productName").innerText;
+      document.getElementById(
+        "toastName"
+      ).textContent = `${model} rajouté au panier`;
       toast.show();
     });
   }
