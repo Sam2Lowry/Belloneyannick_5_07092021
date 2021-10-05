@@ -3,6 +3,8 @@
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
 
+
+
 //Fonction de décompte des items dans le localStorage
 function cartToken() {
   var cartCounter = 0;
