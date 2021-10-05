@@ -1,3 +1,4 @@
+/*jshint esversion: 8 */
 // Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
 
@@ -98,8 +99,9 @@ function Purchase() {
     var cameraLens = document.getElementById("lensesForm").value;
 
     //récupération du prix et transformation en chiffres
-    var price = document.getElementById("price").innerText;
-    var price = parseInt(price, 10);
+    var priceLit = document.getElementById("price").innerText;
+
+    var price = parseInt(priceLit, 10);
     //récupération de la source de l'image
     var imageUrl = document.getElementById("productImage").getAttribute("src");
 
