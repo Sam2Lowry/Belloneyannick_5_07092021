@@ -134,17 +134,18 @@ function Purchase() {
     console.log(product);
 
     //création d'un index
-    // let d = new Date();
-    // let productIndex = `prod${d.getTime()}`;
-    // console.log(productIndex);
+    
     let productIndex = model + "__" + cameraLens;
     console.log(productIndex);
 
     //Test présence de l'objet dans le locale storage
-    var cartItem = localStorage.getItem(`"${productIndex}"`);
+    var cartItem = JSON.parse(localStorage.getItem(`"${productIndex}"`));
+
     if (cartItem !== null) {
       console.log("produit dans le panier");
-      console.log(cartItem + "test");
+      console.log(cartItem.quantity + " = donnée de l'objet parse from json");
+      cartItem.quantity += quantity;
+      localStorage.setItem(`"${productIndex}"`, JSON.stringify(cartItem));
     } else {
       localStorage.setItem(`"${productIndex}"`, JSON.stringify(product));
       console.log("produit rajouté dans le panier");
