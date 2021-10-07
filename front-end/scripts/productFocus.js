@@ -6,12 +6,13 @@ eventListeners();
 
 //Classe de stockage du produit
 class Product {
-  constructor(idModel, model, lens, price, imageUrl) {
+  constructor(idModel, model, lens, price, imageUrl, quantity) {
     this.idModel = idModel;
     this.model = model;
     this.lens = lens;
     this.price = price;
     this.imageUrl = imageUrl;
+    this.quantity = quantity;
   }
 }
 
@@ -104,6 +105,7 @@ function Purchase() {
     var price = parseInt(priceLit, 10);
     //récupération de la source de l'image
     var imageUrl = document.getElementById("productImage").getAttribute("src");
+    var quantity = 1;
 
     //button var
     const button = document.getElementById("purchaseBtn");
@@ -121,19 +123,28 @@ function Purchase() {
     }, 1500);
 
     //Création de l'objet à exporter dans le locale storage
-    const product = new Product(cameraId, model, cameraLens, price, imageUrl);
+    const product = new Product(
+      cameraId,
+      model,
+      cameraLens,
+      price,
+      imageUrl,
+      quantity
+    );
     console.log(product);
 
     //création d'un index
     // let d = new Date();
     // let productIndex = `prod${d.getTime()}`;
     // console.log(productIndex);
-    let productIndex = (model + "--" + cameraLens);
+    let productIndex = model + "__" + cameraLens;
     console.log(productIndex);
 
     //Test présence de l'objet dans le locale storage
-    if (localStorage.getItem(`"${productIndex}"`) !== null) {
+    var cartItem = localStorage.getItem(`"${productIndex}"`);
+    if (cartItem !== null) {
       console.log("produit dans le panier");
+      console.log(cartItem + "test");
     } else {
       localStorage.setItem(`"${productIndex}"`, JSON.stringify(product));
       console.log("produit rajouté dans le panier");
