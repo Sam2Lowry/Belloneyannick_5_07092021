@@ -1,3 +1,4 @@
+/*jshint esversion: 9 */
 // Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
 
@@ -5,12 +6,13 @@ eventListeners();
 
 //Classe de stockage du produit
 class Product {
-  constructor(idModel, model, lens, price, imageUrl) {
+  constructor(idModel, model, lens, price, imageUrl, quantity) {
     this.idModel = idModel;
     this.model = model;
     this.lens = lens;
     this.price = price;
     this.imageUrl = imageUrl;
+    this.quantity = quantity;
   }
 }
 
@@ -98,10 +100,12 @@ function Purchase() {
     var cameraLens = document.getElementById("lensesForm").value;
 
     //récupération du prix et transformation en chiffres
-    var price = document.getElementById("price").innerText;
-    var price = parseInt(price, 10);
+    var priceLit = document.getElementById("price").innerText;
+
+    var price = parseInt(priceLit, 10);
     //récupération de la source de l'image
     var imageUrl = document.getElementById("productImage").getAttribute("src");
+    var quantity = 1;
 
     //button var
     const button = document.getElementById("purchaseBtn");
@@ -119,19 +123,31 @@ function Purchase() {
     }, 1500);
 
     //Création de l'objet à exporter dans le locale storage
-    const product = new Product(cameraId, model, cameraLens, price, imageUrl);
+    const product = new Product(
+      cameraId,
+      model,
+      cameraLens,
+      price,
+      imageUrl,
+      quantity
+    );
     console.log(product);
 
     //création d'un index
-    let d = new Date();
-    let productIndex = `prod${d.getTime()}`;
+    
+    let productIndex = model + "__" + cameraLens;
     console.log(productIndex);
 
     //Test présence de l'objet dans le locale storage
-    if (localStorage.getItem(`"${productIndex}cart"`) !== null) {
+    var cartItem = JSON.parse(localStorage.getItem(`"${productIndex}"`));
+
+    if (cartItem !== null) {
       console.log("produit dans le panier");
+      console.log(cartItem.quantity + " = donnée de l'objet parse from json");
+      cartItem.quantity += quantity;
+      localStorage.setItem(`"${productIndex}"`, JSON.stringify(cartItem));
     } else {
-      localStorage.setItem(`"${productIndex}cart"`, JSON.stringify(product));
+      localStorage.setItem(`"${productIndex}"`, JSON.stringify(product));
       console.log("produit rajouté dans le panier");
     }
     //mise à jour du token panier

@@ -1,3 +1,4 @@
+/*jshint esversion: 9 */
 // lien de l'api pour les caméras
 const stockCameras = "http://localhost:3000/api/cameras";
 
