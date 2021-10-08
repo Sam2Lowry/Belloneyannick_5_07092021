@@ -1,4 +1,4 @@
-/*jshint esversion: 8 */
+/*jshint esversion: 9 */
 // Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
 
