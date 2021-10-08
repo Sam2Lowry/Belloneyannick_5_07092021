@@ -1,21 +1,9 @@
 /*jshint esversion: 9 */
-// const items = { ...localStorage };
-// console.log(items);
-
-// for (let i = 0; i < localStorage.length; i++) {
-//   const key = localStorage.key(i);
-//   console.log(`${key}: ${localStorage.getItem(key)}`);
-// }
-
-// function getCartItems() {
-//   let cartItems = { ...localStorage };
-
-// Constructor = idModel, model, lens, price, imageUrl, quantity
-
 
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
-document.addEventListener("DOMContentLoaded", showCart);
+document.addEventListener("DOMContentLoaded", loadCart);
+
 
 //Fonction de décompte des items dans le localStorage
 function cartToken() {
@@ -30,28 +18,43 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
-dataCart = [];
+
 function loadCart() {
+  const container = document.getElementById("cartList");
+  let dataList;
   // récupération de toutes les clefs LocalStorage du panier
-  let num = localStorage.length;
-  if (num) {
-    for (let i = 0; i < num; i++) {
-      let key = localStorage.key(i);
-      console.log(key);
-      dataCart.push(key);
-      console.log(dataCart);
-    }
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    // console.log(`${key}: ${localStorage.getItem(key)}`);
+    dataList = JSON.parse(localStorage.getItem(key));
+    console.log(dataList);
+    
+   
   }
 }
 
 
-function showCart() {
-  loadCart();
-  itemList = localStorage.getItem(loadCart());
-  const container = document.getElementById("cartList");
-  dataCart.forEach((item) => {
-    //Construction de l'item
-    const content = `<div
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+const content = `<div
     class="
                   d-flex
                   flex-row
@@ -94,20 +97,7 @@ function showCart() {
     </div>
   </div>`;
 
-    //injection dans le html de celle ci au sein de la section produit
-    container.innerHTML += content;
-  });
-}
-
-
-
-
-
-function incrementCart() {}
-function decrementCart() {}
-function clearCart() {}
-function errorMessage() {
-  console.error("Error");
-}
-
-
+      //injection dans le html de celle ci au sein de la section produit
+      container.innerHTML += content;
+    };
+    */
