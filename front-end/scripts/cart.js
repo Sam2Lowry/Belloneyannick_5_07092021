@@ -2,7 +2,7 @@
 
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
-document.addEventListener("DOMContentLoaded", loadCart);
+document.addEventListener("DOMContentLoaded", getData);
 const Cart = [];
 
 //Fonction de décompte des items dans le localStorage
@@ -18,15 +18,23 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
+function getData() {
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    let dataList = JSON.parse(localStorage.getItem(key));
+    console.log(dataList);
+    Cart.push(dataList);
+    console.log(Cart);
+  }
+  loadCart();
+}
 
 function loadCart() {
   const container = document.getElementById("cartList");
   // récupération de toutes les clefs LocalStorage du panier
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    let dataList = JSON.parse(localStorage.getItem(key));
-    Cart.push(dataList);
-    console.log(Cart)
+
+  if (Cart !== undefined) {
+    console.log(Cart);
     Cart.forEach((item) => {
       const content = `<div
       class="
