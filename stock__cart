@@ -1,32 +1,15 @@
-/*jshint esversion: 9 */
 
-//Une fois le dom chargé alors, éxécution du décompte panier
-document.addEventListener("DOMContentLoaded", cartToken);
-document.addEventListener("DOMContentLoaded", loadCart);
-const Cart = [];
-
-//Fonction de décompte des items dans le localStorage
-function cartToken() {
-  var cartCounter = 0;
-  cartCounter = localStorage.length;
-  console.log(cartCounter);
-  if (cartCounter === 0) {
-    document.getElementById("tokenCount").textContent = "Panier vide";
-  } else {
-    document.getElementById(
-      "tokenCount"
-    ).textContent = `Panier (${cartCounter})`;
-  }
-}
-
+/* 
 function loadCart() {
   const container = document.getElementById("cartList");
   // récupération de toutes les clefs LocalStorage du panier
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     let dataList = JSON.parse(localStorage.getItem(key));
+   
+  
     Cart.push(dataList);
-    console.log(Cart)
+    console.log(Cart);
     Cart.forEach((item) => {
       const content = `<div
       class="
