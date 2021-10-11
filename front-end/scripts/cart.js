@@ -3,6 +3,12 @@
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
 document.addEventListener("DOMContentLoaded", getData);
+document.addEventListener('click', (e) => {
+  if (!e.target.matches('.btn-supp, .btn-supp *')) {
+    return;
+  }
+  console.log('It works!');
+});
 // Chargement en mémoire du locale Storage
 const Cart = [];
 
@@ -76,7 +82,7 @@ function loadCart() {
       <div>
         <h5 class="text-grey">${item.price * item.quantity} €</h5>
       </div>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center btn-supp">
         <i class="fa fa-trash mb-1 text-danger"></i>
       </div>
     </div>`;
@@ -86,3 +92,4 @@ function loadCart() {
     });
   }
 }
+
