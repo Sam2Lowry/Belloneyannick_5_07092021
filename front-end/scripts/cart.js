@@ -19,7 +19,11 @@ document.addEventListener("click", (e) => {
 // Chargement en mémoire du locale Storage
 const Cart = [];
 //constante de formatage des valeures numériques de monnaies
-const formatter = new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR", currencyDisplay: "symbol"});
+const formatter = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  currencyDisplay: "symbol",
+});
 
 //Fonction de décompte des items dans le localStorage
 function cartToken() {
@@ -36,24 +40,20 @@ function cartToken() {
 }
 
 function updateCartTotal() {
-  let sum = [];
-  let Items = 0;
-  //récupération des données du DOM
-  var domPrices = document.getElementsByClassName("price-tag");
-  for (var i = 0; i < domPrices.length; i++) {
-    var item = domPrices[i];
-    //Push des données dans l'Array du prix
-    sum.push(parseInt(item.innerText));
-    Items = (previousValue, currentValue) => previousValue + currentValue;
-    //Addition
-    totalPrice = formatter.format(sum.reduce(Items));
-  }
+  let cartPrices = [];
+  Cart.forEach((item) => {
+    cartPrices.push(item.quantity * item.price);
+  });
+  const reducer = (acc, cur) => acc + cur;
+  const totalPrice = cartPrices.reduce(reducer, 0);
+  console.log(totalPrice);
+
   //Prix hors boucle
   console.log(totalPrice);
-  document.getElementById("totalPrice").textContent = `Prix total : ${totalPrice}`;
-  
+  document.getElementById(
+    "totalPrice"
+  ).textContent = `Prix total : ${formatter.format(totalPrice)}`;
 }
-
 
 function getData() {
   for (let i = 0; i < localStorage.length; i++) {
@@ -117,9 +117,9 @@ function loadCart() {
             </div>
       </div>
       <div class="d-flex flex-row">
-        <h5 class="text-grey mx-auto price-tag">${ 
+        <h5 class="text-grey mx-auto price-tag">${formatter.format(
           item.price * item.quantity
-        }</h5>
+        )}</h5>
       </div>
       <div class="d-flex align-items-center btn-supp">
         <i class="fa fa-trash mb-1 text-danger"></i>
