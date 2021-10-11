@@ -3,20 +3,23 @@
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
 document.addEventListener("DOMContentLoaded", getData);
-document.addEventListener('click', (e) => {
-  if (!e.target.matches('.btn-supp, .btn-supp *')) {
+document.addEventListener("click", (e) => {
+  if (!e.target.matches(".btn-supp, .btn-supp *")) {
     return;
   }
-  console.log('It works!');
+  updateCartTotal();
+  console.log("It works!");
 });
-document.addEventListener('click', (e) => {
-  if (!e.target.matches('.bi-basket2-fill, .bi-basket2-fill *')) {
+document.addEventListener("click", (e) => {
+  if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
     return;
   }
-  console.log('It works too!');
+  console.log("It works too!");
 });
 // Chargement en mémoire du locale Storage
 const Cart = [];
+//constante de formatage des valeures numériques de monnaies
+const formatter = new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR", currencyDisplay: "symbol"});
 
 //Fonction de décompte des items dans le localStorage
 function cartToken() {
@@ -31,6 +34,26 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
+
+function updateCartTotal() {
+  let sum = [];
+  let Items = 0;
+  //récupération des données du DOM
+  var domPrices = document.getElementsByClassName("price-tag");
+  for (var i = 0; i < domPrices.length; i++) {
+    var item = domPrices[i];
+    //Push des données dans l'Array du prix
+    sum.push(parseInt(item.innerText));
+    Items = (previousValue, currentValue) => previousValue + currentValue;
+    //Addition
+    totalPrice = formatter.format(sum.reduce(Items));
+  }
+  //Prix hors boucle
+  console.log(totalPrice);
+  document.getElementById("totalPrice").textContent = `Prix total : ${totalPrice}`;
+}
+
+
 function getData() {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -87,11 +110,15 @@ function loadCart() {
   <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"></path>
 </svg>
               </span>
-              <input type="number" class="form-control" placeholder="${item.quantity}" aria-label="quantité">
+              <input type="number" class="form-control" placeholder="${
+                item.quantity
+              }" min="1" max="100" aria-label="quantité">
             </div>
       </div>
       <div class="d-flex flex-row">
-        <h5 class="text-grey mx-auto">${item.price * item.quantity} €</h5>
+        <h5 class="text-grey mx-auto price-tag">${
+          formatter.format (item.price * item.quantity)
+        }</h5>
       </div>
       <div class="d-flex align-items-center btn-supp">
         <i class="fa fa-trash mb-1 text-danger"></i>
@@ -102,5 +129,5 @@ function loadCart() {
       container.innerHTML += content;
     });
   }
+  updateCartTotal();
 }
-
