@@ -3,6 +3,7 @@
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
 document.addEventListener("DOMContentLoaded", getData);
+// Chargement en mémoire du locale Storage
 const Cart = [];
 
 //Fonction de décompte des items dans le localStorage
@@ -48,6 +49,7 @@ function loadCart() {
                     px-3
                     rounded
                   "
+                  id="${item.model}__${item.lens}"
     >
       <div class="mr-1">
         <img
@@ -72,7 +74,7 @@ function loadCart() {
         <i class="fa fa-plus text-success"></i>
       </div>
       <div>
-        <h5 class="text-grey">${item.price}</h5>
+        <h5 class="text-grey">${item.price * item.quantity} €</h5>
       </div>
       <div class="d-flex align-items-center">
         <i class="fa fa-trash mb-1 text-danger"></i>
