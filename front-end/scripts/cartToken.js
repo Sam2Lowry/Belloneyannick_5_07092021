@@ -1,3 +1,4 @@
+/*jshint esversion: 9 */
 document.addEventListener("DOMContentLoaded", cartToken);
 function cartToken() {
   var cartCounter = 0;
@@ -11,4 +12,3 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
-
