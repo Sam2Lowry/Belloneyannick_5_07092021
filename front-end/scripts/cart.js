@@ -30,6 +30,9 @@ function deleteData() {
     .getElementById(document.getElementById("anchorSupp").parentElement.id)
     .remove();
   // window.location.reload();
+  //index retrieving of the value
+  const index = Cart.findIndex(x => x.productIndex === JSON.parse(itemSupp));
+  console.log(index);
 }
 
 document.addEventListener("click", (e) => {
