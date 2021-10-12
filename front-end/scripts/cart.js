@@ -3,19 +3,6 @@
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", cartToken);
 document.addEventListener("DOMContentLoaded", getData);
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".btn-supp, .btn-supp *")) {
-    return;
-  }
-  updateCartTotal();
-  console.log("It works!");
-});
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
-    return;
-  }
-  console.log("It works too!");
-});
 // Chargement en mémoire du locale Storage
 const Cart = [];
 //constante de formatage des valeures numériques de monnaies
@@ -25,36 +12,35 @@ const formatter = new Intl.NumberFormat("fr-FR", {
   currencyDisplay: "symbol",
 });
 
-//Fonction de décompte des items dans le localStorage
-function cartToken() {
-  var cartCounter = 0;
-  cartCounter = localStorage.length;
-  console.log(cartCounter);
-  if (cartCounter === 0) {
-    document.getElementById("tokenCount").textContent = "Panier vide";
-  } else {
-    document.getElementById(
-      "tokenCount"
-    ).textContent = `Panier (${cartCounter})`;
+document.addEventListener("click", (e) => {
+  if (!e.target.matches(".btn-supp, .btn-supp *")) {
+    return;
   }
+  
+
+
+ console.log('it works');
+  deleteData();
+ 
+});
+
+function deleteData() {
+  var itemSupp = JSON.stringify(
+    document.getElementById("anchorSupp").parentElement.id
+  );
+  console.log(itemSupp);
+  localStorage.removeItem(itemSupp);
+  console.log("It works!");
 }
 
-function updateCartTotal() {
-  let cartPrices = [];
-  Cart.forEach((item) => {
-    cartPrices.push(item.quantity * item.price);
-  });
-  const reducer = (acc, cur) => acc + cur;
-  const totalPrice = cartPrices.reduce(reducer, 0);
-  console.log(totalPrice);
+document.addEventListener("click", (e) => {
+  if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
+    return;
+  }
+  console.log("It works too!");
+});
 
-  //Prix hors boucle
-  console.log(totalPrice);
-  document.getElementById(
-    "totalPrice"
-  ).textContent = `Prix total : ${formatter.format(totalPrice)}`;
-}
-
+// double fonction d'appel de donnée de le localStorage et d'injection
 function getData() {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -121,7 +107,7 @@ function loadCart() {
           item.price * item.quantity
         )}</h5>
       </div>
-      <div class="d-flex align-items-center btn-supp">
+      <div class="d-flex align-items-center btn-supp" id="anchorSupp">
         <i class="fa fa-trash mb-1 text-danger"></i>
       </div>
     </div>`;
@@ -131,4 +117,34 @@ function loadCart() {
     });
   }
   updateCartTotal();
+}
+
+function updateCartTotal() {
+  let cartPrices = [];
+  Cart.forEach((item) => {
+    cartPrices.push(item.quantity * item.price);
+  });
+  const reducer = (acc, cur) => acc + cur;
+  const totalPrice = cartPrices.reduce(reducer, 0);
+  console.log(totalPrice);
+
+  //Prix hors boucle
+  console.log(totalPrice);
+  document.getElementById(
+    "totalPrice"
+  ).textContent = `Prix total : ${formatter.format(totalPrice)}`;
+}
+
+//Fonction de décompte des items dans le localStorage
+function cartToken() {
+  var cartCounter = 0;
+  cartCounter = localStorage.length;
+  console.log(cartCounter);
+  if (cartCounter === 0) {
+    document.getElementById("tokenCount").textContent = "Panier vide";
+  } else {
+    document.getElementById(
+      "tokenCount"
+    ).textContent = `Panier (${cartCounter})`;
+  }
 }
