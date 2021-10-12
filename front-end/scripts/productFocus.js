@@ -6,7 +6,8 @@ eventListeners();
 
 //Classe de stockage du produit
 class Product {
-  constructor(idModel, model, lens, price, imageUrl, quantity) {
+  constructor(productIndex, idModel, model, lens, price, imageUrl, quantity) {
+    this.productIndex = productIndex;
     this.idModel = idModel;
     this.model = model;
     this.lens = lens;
@@ -121,9 +122,14 @@ function Purchase() {
       button.textContent = "Commander";
       button.disabled = false;
     }, 1500);
+    //création d'un index
+
+    let productIndex = model + "__" + cameraLens;
+    console.log(productIndex);
 
     //Création de l'objet à exporter dans le locale storage
     const product = new Product(
+      productIndex,
       cameraId,
       model,
       cameraLens,
@@ -132,11 +138,6 @@ function Purchase() {
       quantity
     );
     console.log(product);
-
-    //création d'un index
-    
-    let productIndex = model + "__" + cameraLens;
-    console.log(productIndex);
 
     //Test présence de l'objet dans le locale storage
     var cartItem = JSON.parse(localStorage.getItem(`"${productIndex}"`));

@@ -16,12 +16,8 @@ document.addEventListener("click", (e) => {
   if (!e.target.matches(".btn-supp, .btn-supp *")) {
     return;
   }
-  
-
-  
- console.log('it works');
+  console.log("it works");
   deleteData();
- 
 });
 
 function deleteData() {
@@ -30,7 +26,10 @@ function deleteData() {
   );
   console.log(itemSupp);
   localStorage.removeItem(itemSupp);
-  console.log("It works!");
+  document
+    .getElementById(document.getElementById("anchorSupp").parentElement.id)
+    .remove();
+  // window.location.reload();
 }
 
 document.addEventListener("click", (e) => {
