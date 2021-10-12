@@ -46,3 +46,15 @@ body::before {
 .qty i {
   font-size: 11px
 }
+
+
+#btn-qty:hover{
+  color:rgb(22, 155, 22);
+  cursor:pointer;
+}
+
+.btn-supp:hover{
+  cursor:pointer;
+  transition : opacity 250ms ease;
+  opacity : 0.5;
+}
