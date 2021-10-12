@@ -18,7 +18,7 @@ document.addEventListener("click", (e) => {
   }
   
 
-
+  
  console.log('it works');
   deleteData();
  
