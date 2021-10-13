@@ -31,8 +31,10 @@ function deleteData() {
     .remove();
   // window.location.reload();
   //index retrieving of the value
-  const index = Cart.findIndex(x => x.productIndex === JSON.parse(itemSupp));
+  const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSupp));
   console.log(index);
+  Cart.splice(index, 1);
+  updateCartTotal();
 }
 
 document.addEventListener("click", (e) => {
