@@ -20,6 +20,15 @@ document.addEventListener("click", (e) => {
   deleteData();
 });
 
+document.addEventListener("click", (e) => {
+  if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
+    return;
+  }
+  console.log("It works too!");
+  saveData();
+});
+
+/*
 function deleteData() {
   var itemSupp = JSON.stringify(
     document.getElementById("anchorSupp").parentElement.id
@@ -60,14 +69,8 @@ console.log(indexSave);
 
 
 }
+*/
 
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
-    return;
-  }
-  console.log("It works too!");
-  saveData();
-});
 
 // double fonction d'appel de donnée de le localStorage et d'injection
 function getData() {
