@@ -29,7 +29,7 @@ function deleteData() {
   document
     .getElementById(document.getElementById("anchorSupp").parentElement.id)
     .remove();
-  // window.location.reload();
+
   //index retrieving of the value
   const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSupp));
   console.log(index);
@@ -37,11 +37,45 @@ function deleteData() {
   updateCartTotal();
 }
 
+function saveData() {
+  var itemSave = JSON.stringify(
+    document.getElementById("anchorSupp").parentElement.id
+  );
+  var formQty = document.getElementById("form_Qty").value;
+  console.log(itemSave);
+  console.log(formQty);
+  const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
+  console.log(index);
+
+//Test présence de l'objet dans le locale storage
+var cartSave = JSON.parse(localStorage.getItem(itemSave));
+console.log(cartSave);
+console.log(cartSave.quantity);
+cartSave.quantity += (parseInt(formQty) - cartSave.quantity);
+console.log(cartSave.quantity);
+localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
+
+/*
+if (CartSave !== null) {
+  console.log("produit dans le panier");
+  console.log(CartSave.quantity + " = donnée de l'objet parse from json");
+  CartSave.quantity += quantity;
+  localStorage.setItem(`"${productIndex}"`, JSON.stringify(CartSave));
+} else {
+  localStorage.setItem(`"${productIndex}"`, JSON.stringify(product));
+  console.log("produit rajouté dans le panier");
+}
+*/
+
+
+}
+
 document.addEventListener("click", (e) => {
   if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
     return;
   }
   console.log("It works too!");
+  saveData();
 });
 
 // double fonction d'appel de donnée de le localStorage et d'injection
@@ -101,7 +135,7 @@ function loadCart() {
   <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"></path>
 </svg>
               </span>
-              <input type="number" class="form-control" placeholder="0" value="${
+              <input type="number" id="form_Qty" class="form-control" placeholder="0" value="${
                 item.quantity
               }" min="1" max="100" aria-label="quantité">
             </div>
