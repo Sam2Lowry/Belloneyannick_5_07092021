@@ -31,9 +31,9 @@ function deleteData() {
     .remove();
 
   //index retrieving of the value
-  const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSupp));
-  console.log(index);
-  Cart.splice(index, 1);
+  let indexSupp = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSupp));
+  console.log(indexSupp);
+  Cart.splice(indexSupp, 1);
   updateCartTotal();
 }
 
@@ -47,25 +47,16 @@ function saveData() {
   const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
   console.log(index);
 
-//Test présence de l'objet dans le locale storage
+//mise à jour du localStorage en terme de quantité
 var cartSave = JSON.parse(localStorage.getItem(itemSave));
 console.log(cartSave);
 console.log(cartSave.quantity);
 cartSave.quantity += (parseInt(formQty) - cartSave.quantity);
 console.log(cartSave.quantity);
 localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
-
-/*
-if (CartSave !== null) {
-  console.log("produit dans le panier");
-  console.log(CartSave.quantity + " = donnée de l'objet parse from json");
-  CartSave.quantity += quantity;
-  localStorage.setItem(`"${productIndex}"`, JSON.stringify(CartSave));
-} else {
-  localStorage.setItem(`"${productIndex}"`, JSON.stringify(product));
-  console.log("produit rajouté dans le panier");
-}
-*/
+//mise à jour du Cart en terme de quantité
+let indexSave = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
+console.log(indexSave);
 
 
 }
