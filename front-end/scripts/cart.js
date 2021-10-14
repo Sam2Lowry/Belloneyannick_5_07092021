@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   getData();
 
   //event listeners buttons
-  function getId () {
+  function getId() {
     const itemList = document.querySelector("#cartList");
     itemList.addEventListener("click", (event) => {
       var element = event.target;
@@ -19,23 +19,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
-      
       return;
     }
     console.log(element.closest(".glubiTest").id);
     console.log("It works too!");
   });
-/*
+
   // --> bouton supprimer
   document.addEventListener("click", (e) => {
+    var element = e.target;
     if (!e.target.matches(".btn-supp, .btn-supp *")) {
       return;
     }
-    
+    console.log(element.closest(".glubiTest").id);
     console.log("it works");
   });
-*/
-
 });
 
 // Chargement en mémoire du locale Storage
