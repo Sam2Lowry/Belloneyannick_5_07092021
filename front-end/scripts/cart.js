@@ -1,8 +1,35 @@
 /*jshint esversion: 9 */
 
 //Une fois le dom chargé alors, éxécution du décompte panier
-document.addEventListener("DOMContentLoaded", cartToken);
-document.addEventListener("DOMContentLoaded", getData);
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  cartToken();
+  getData();
+
+  //event listerners buttons
+
+  // --> bouton rajouter
+  document.addEventListener("click", (e) => {
+    if (!e.target.matches(".btn-qty, .btn-qty *")) {
+      return;
+    }
+    alert(this.id);
+    console.log("It works too!");
+  });
+
+  // --> bouton supprimer
+  document.addEventListener("click", (e) => {
+    if (!e.target.matches(".btn-supp, .btn-supp *")) {
+      return;
+    }
+    alert(this.id);
+    console.log("it works");
+  });
+
+  
+});
+
+
 // Chargement en mémoire du locale Storage
 const Cart = [];
 //constante de formatage des valeures numériques de monnaies
@@ -10,24 +37,6 @@ const formatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
   currency: "EUR",
   currencyDisplay: "symbol",
-});
-
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".btn-supp, .btn-supp *")) {
-    return;
-  }
-  console.log("it works");
- 
-  //deleteData();
-});
-
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".btn-qty, .btn-qty *")) {
-    return;
-  }
-  console.log("It works too!");
- 
-  //saveData();
 });
 
 /*
@@ -72,7 +81,6 @@ console.log(indexSave);
 
 }
 */
-
 
 // double fonction d'appel de donnée de le localStorage et d'injection
 function getData() {
@@ -126,11 +134,11 @@ function loadCart() {
       </div>
       <div class="d-flex flex-row align-items-center qty">
       <div class="input-group w-50">
-              <span class="input-group-text btn-qty" custom-id="${item.model}__${item.lens}"  >
+              <button class="input-group-text btn-qty  "  >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
   <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"></path>
 </svg>
-              </span>
+              </button>
               <input type="number" id="form_Qty" class="form-control" placeholder="0" value="${
                 item.quantity
               }" min="1" max="100" aria-label="quantité">
@@ -141,8 +149,10 @@ function loadCart() {
           item.price * item.quantity
         )}</h5>
       </div>
-      <div class="d-flex align-items-center btn-supp" custom-id="${item.model}__${item.lens}" >
-        <i class="fa fa-trash mb-1 text-danger"></i>
+      <div class="d-flex align-items-center  btn-supp" id="${
+        item.model
+      }__${item.lens}" >
+        <i class="fa fa-trash mb-1 text-danger "></i>
       </div>
     </div>`;
 
