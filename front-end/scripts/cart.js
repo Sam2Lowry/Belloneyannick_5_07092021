@@ -6,30 +6,37 @@ document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
   getData();
 
-  //event listerners buttons
+  //event listeners buttons
+  function getId () {
+    const itemList = document.querySelector("#cartList");
+    itemList.addEventListener("click", (event) => {
+      var element = event.target;
+      alert(element.closest(".glubiTest").id);
+    });
+  }
 
   // --> bouton rajouter
   document.addEventListener("click", (e) => {
+    var element = e.target;
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
       
       return;
     }
-    console.log(e.target.id);
+    console.log(element.closest(".glubiTest").id);
     console.log("It works too!");
   });
-
+/*
   // --> bouton supprimer
   document.addEventListener("click", (e) => {
     if (!e.target.matches(".btn-supp, .btn-supp *")) {
       return;
     }
-    console.log(e.target.id);
+    
     console.log("it works");
   });
-
+*/
 
 });
-
 
 // Chargement en mémoire du locale Storage
 const Cart = [];
@@ -113,6 +120,7 @@ function loadCart() {
                     mt-4
                     px-3
                     rounded
+                    glubiTest
                   "
                   id="${item.model}__${item.lens}"
     >
@@ -135,10 +143,8 @@ function loadCart() {
       </div>
       <div class="d-flex flex-row align-items-center qty">
       <div class="input-group w-50">
-              <button class="input-group-text btn-qty" id="${
-                item.model
-              }__${item.lens}">
-              <i class="bi bi-basket3-fill fa-lg" id="${item.model}__${item.lens}" ></i>
+              <button class="input-group-text btn-qty" >
+              <i class="bi bi-basket3-fill fa-lg"  ></i>
               </button>
               <input type="number" id="form_Qty" class="form-control" placeholder="0" value="${
                 item.quantity
@@ -150,8 +156,8 @@ function loadCart() {
           item.price * item.quantity
         )}</h5>
       </div>
-      <div class="d-flex align-items-center  btn-supp" id="${item.model}__${item.lens}">
-        <i class="fa fa-trash mb-1 text-danger " id="${item.model}__${item.lens}"></i>
+      <div class="d-flex align-items-center  btn-supp" >
+        <i class="fa fa-trash mb-1 text-danger " ></i>
       </div>
     </div>`;
 
