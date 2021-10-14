@@ -152,7 +152,7 @@ function loadCart() {
           item.price * item.quantity
         )}</h5>
       </div>
-      <div class="d-flex align-items-center  btn-supp" >
+      <div class="d-flex align-items-center  btn-supp" id="${item.model}__${item.lens}">
         <i class="fa fa-trash mb-1 text-danger " id="${item.model}__${item.lens}"></i>
       </div>
     </div>`;
