@@ -58,3 +58,11 @@ const content = `<div
       container.innerHTML += content;
     };
     */
+
+    function getId() {
+      const itemList = document.querySelector("#cartList");
+      itemList.addEventListener("click", (event) => {
+        var element = event.target;
+        alert(element.closest(".glubiTest").id);
+      });
+    }

@@ -48,7 +48,7 @@ body::before {
 }
 
 
-#btn-qty:hover{
+.btn-qty:hover{
   color:rgb(22, 155, 22);
   cursor:pointer;
 }
@@ -58,3 +58,4 @@ body::before {
   transition : opacity 250ms ease;
   opacity : 0.5;
 }
+

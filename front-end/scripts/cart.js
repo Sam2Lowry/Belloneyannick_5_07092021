@@ -1,10 +1,41 @@
 /*jshint esversion: 9 */
 
 //Une fois le dom chargé alors, éxécution du décompte panier
-document.addEventListener("DOMContentLoaded", cartToken);
-document.addEventListener("DOMContentLoaded", getData);
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  cartToken();
+  getData();
+
+  //event listeners buttons
+  // --> bouton rajouter
+
+  document.addEventListener("click", (e) => {
+    var element = e.target;
+    if (!e.target.matches(".btn-qty, .btn-qty *")) {
+      return;
+    }
+    clickPlusId = element.closest(".glubiTest").id;
+    console.log(clickPlusId);
+    saveData();
+  });
+
+  // --> bouton supprimer
+
+  document.addEventListener("click", (e) => {
+    var element = e.target;
+    if (!e.target.matches(".btn-supp, .btn-supp *")) {
+      return;
+    }
+    clickMinusId = element.closest(".glubiTest").id;
+    console.log(clickMinusId);
+    deleteData();
+  });
+});
+
 // Chargement en mémoire du locale Storage
 const Cart = [];
+var clickMinusId;
+var clickPlusId;
 //constante de formatage des valeures numériques de monnaies
 const formatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -12,65 +43,44 @@ const formatter = new Intl.NumberFormat("fr-FR", {
   currencyDisplay: "symbol",
 });
 
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".btn-supp, .btn-supp *")) {
-    return;
-  }
-  console.log("it works");
-  deleteData();
-});
-
-document.addEventListener("click", (e) => {
-  if (!e.target.matches(".bi-basket2-fill, .bi-basket2-fill *")) {
-    return;
-  }
-  console.log("It works too!");
-  saveData();
-});
-
-/*
 function deleteData() {
-  var itemSupp = JSON.stringify(
-    document.getElementById("anchorSupp").parentElement.id
-  );
+  var itemSupp = JSON.stringify(clickMinusId);
   console.log(itemSupp);
+  document.getElementById(clickMinusId.toString()).remove();
   localStorage.removeItem(itemSupp);
-  document
-    .getElementById(document.getElementById("anchorSupp").parentElement.id)
-    .remove();
-
   //index retrieving of the value
-  let indexSupp = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSupp));
+  let indexSupp = Cart.findIndex(
+    (x) => x.productIndex === JSON.parse(itemSupp)
+  );
   console.log(indexSupp);
   Cart.splice(indexSupp, 1);
   updateCartTotal();
+  cartToken();
 }
 
 function saveData() {
-  var itemSave = JSON.stringify(
-    document.getElementById("anchorSupp").parentElement.id
-  );
+  var itemSave = JSON.stringify(clickPlusId);
   var formQty = document.getElementById("form_Qty").value;
   console.log(itemSave);
   console.log(formQty);
+
+  //Mise en place de l'index
   const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
   console.log(index);
 
-//mise à jour du localStorage en terme de quantité
-var cartSave = JSON.parse(localStorage.getItem(itemSave));
-console.log(cartSave);
-console.log(cartSave.quantity);
-cartSave.quantity += (parseInt(formQty) - cartSave.quantity);
-console.log(cartSave.quantity);
-localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
-//mise à jour du Cart en terme de quantité
-let indexSave = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
-console.log(indexSave);
-
-
+  //mise à jour du localStorage en terme de quantité
+  var cartSave = JSON.parse(localStorage.getItem(itemSave));
+  console.log(cartSave);
+  console.log(cartSave.quantity);
+  cartSave.quantity += parseInt(formQty) - cartSave.quantity;
+  console.log(cartSave.quantity);
+  localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
+  Cart.splice(index, 1, cartSave);
+  document.getElementById("showPriceItem").textContent = `${formatter.format(
+    cartSave.price * cartSave.quantity
+  )}`;
+  updateCartTotal();
 }
-*/
-
 
 // double fonction d'appel de donnée de le localStorage et d'injection
 function getData() {
@@ -102,6 +112,7 @@ function loadCart() {
                     mt-4
                     px-3
                     rounded
+                    glubiTest
                   "
                   id="${item.model}__${item.lens}"
     >
@@ -124,23 +135,21 @@ function loadCart() {
       </div>
       <div class="d-flex flex-row align-items-center qty">
       <div class="input-group w-50">
-              <span class="input-group-text" id="btn-qty">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
-  <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"></path>
-</svg>
-              </span>
+              <button class="input-group-text btn-qty" >
+              <i class="bi bi-basket3-fill fa-lg"  ></i>
+              </button>
               <input type="number" id="form_Qty" class="form-control" placeholder="0" value="${
                 item.quantity
               }" min="1" max="100" aria-label="quantité">
             </div>
       </div>
       <div class="d-flex flex-row">
-        <h5 class="text-grey mx-auto price-tag">${formatter.format(
+        <h5 class="text-grey mx-auto price-tag" id="showPriceItem">${formatter.format(
           item.price * item.quantity
         )}</h5>
       </div>
-      <div class="d-flex align-items-center btn-supp" id="anchorSupp">
-        <i class="fa fa-trash mb-1 text-danger"></i>
+      <div class="d-flex align-items-center  btn-supp" >
+        <i class="fa fa-trash mb-1 text-danger " ></i>
       </div>
     </div>`;
 
