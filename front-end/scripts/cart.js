@@ -62,24 +62,23 @@ function saveData() {
   var formQty = document.getElementById("form_Qty").value;
   console.log(itemSave);
   console.log(formQty);
+
   //Mise en place de l'index
   const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
   console.log(index);
+
   //mise à jour du localStorage en terme de quantité
   var cartSave = JSON.parse(localStorage.getItem(itemSave));
   console.log(cartSave);
   console.log(cartSave.quantity);
-  
-  cartSave.quantity += (parseInt(formQty) - cartSave.quantity);
+  cartSave.quantity += parseInt(formQty) - cartSave.quantity;
   console.log(cartSave.quantity);
-  /*
   localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
-  //mise à jour du Cart en terme de quantité
-  let indexSave = Cart.findIndex(
-    (x) => x.productIndex === JSON.parse(itemSave)
-  );
-  console.log(indexSave);
-  */
+  Cart.splice(index, 1, cartSave);
+  document.getElementById(
+    "showPriceItem"
+  ).textContent = `${formatter.format(cartSave.price * cartSave.quantity)}`;
+  updateCartTotal();
 }
 
 // double fonction d'appel de donnée de le localStorage et d'injection
@@ -144,7 +143,7 @@ function loadCart() {
             </div>
       </div>
       <div class="d-flex flex-row">
-        <h5 class="text-grey mx-auto price-tag">${formatter.format(
+        <h5 class="text-grey mx-auto price-tag" id="showPriceItem">${formatter.format(
           item.price * item.quantity
         )}</h5>
       </div>
