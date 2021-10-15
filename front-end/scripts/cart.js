@@ -6,35 +6,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
   getData();
 
-  //event listeners buttons
-  function getId() {
-    const itemList = document.querySelector("#cartList");
-    itemList.addEventListener("click", (event) => {
-      var element = event.target;
-      alert(element.closest(".glubiTest").id);
-    });
-  }
+  
+ 
+});
 
+  //event listeners buttons
   // --> bouton rajouter
+  var clickPlusId;
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
       return;
     }
-    console.log(element.closest(".glubiTest").id);
-    console.log("It works too!");
+    clickPlusId = element.closest(".glubiTest").id;
+    console.log(clickPlusId);
   });
 
   // --> bouton supprimer
+  var clickMinusId;
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-supp, .btn-supp *")) {
       return;
     }
-    console.log(element.closest(".glubiTest").id);
-    console.log("it works");
+    clickMinusId = element.closest(".glubiTest").id;
+    console.log(clickMinusId);
   });
-});
+
 
 // Chargement en mémoire du locale Storage
 const Cart = [];
