@@ -76,9 +76,9 @@ function saveData() {
   console.log(cartSave.quantity);
   localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
   Cart.splice(index, 1, cartSave);
-  document.getElementById(
-    "showPriceItem"
-  ).textContent = `${formatter.format(cartSave.price * cartSave.quantity)}`;
+  document.getElementById("showPriceItem").textContent = `${formatter.format(
+    cartSave.price * cartSave.quantity
+  )}`;
   updateCartTotal();
 }
 
