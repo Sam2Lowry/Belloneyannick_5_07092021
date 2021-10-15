@@ -55,6 +55,7 @@ function deleteData() {
   console.log(indexSupp);
   Cart.splice(indexSupp, 1);
   updateCartTotal();
+  cartToken();
 }
 
 function saveData() {
