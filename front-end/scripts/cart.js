@@ -6,13 +6,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
   getData();
 
-  
- 
-});
-
   //event listeners buttons
   // --> bouton rajouter
-  var clickPlusId;
+
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
@@ -20,10 +16,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
     clickPlusId = element.closest(".glubiTest").id;
     console.log(clickPlusId);
+    saveData();
   });
 
   // --> bouton supprimer
-  var clickMinusId;
+
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-supp, .btn-supp *")) {
@@ -31,11 +28,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
     clickMinusId = element.closest(".glubiTest").id;
     console.log(clickMinusId);
+    deleteData();
   });
-
+});
 
 // Chargement en mémoire du locale Storage
 const Cart = [];
+var clickMinusId;
+var clickPlusId;
 //constante de formatage des valeures numériques de monnaies
 const formatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -43,48 +43,44 @@ const formatter = new Intl.NumberFormat("fr-FR", {
   currencyDisplay: "symbol",
 });
 
-/*
 function deleteData() {
-  var itemSupp = JSON.stringify(
-    document.getElementById("anchorSupp").parentElement.id
-  );
+  var itemSupp = JSON.stringify(clickMinusId);
   console.log(itemSupp);
+  document.getElementById(clickMinusId.toString()).remove();
   localStorage.removeItem(itemSupp);
-  document
-    .getElementById(document.getElementById("anchorSupp").parentElement.id)
-    .remove();
-
   //index retrieving of the value
-  let indexSupp = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSupp));
+  let indexSupp = Cart.findIndex(
+    (x) => x.productIndex === JSON.parse(itemSupp)
+  );
   console.log(indexSupp);
   Cart.splice(indexSupp, 1);
   updateCartTotal();
 }
 
 function saveData() {
-  var itemSave = JSON.stringify(
-    document.getElementById("anchorSupp").parentElement.id
-  );
+  var itemSave = JSON.stringify(clickPlusId);
   var formQty = document.getElementById("form_Qty").value;
   console.log(itemSave);
   console.log(formQty);
+  //Mise en place de l'index
   const index = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
   console.log(index);
-
-//mise à jour du localStorage en terme de quantité
-var cartSave = JSON.parse(localStorage.getItem(itemSave));
-console.log(cartSave);
-console.log(cartSave.quantity);
-cartSave.quantity += (parseInt(formQty) - cartSave.quantity);
-console.log(cartSave.quantity);
-localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
-//mise à jour du Cart en terme de quantité
-let indexSave = Cart.findIndex((x) => x.productIndex === JSON.parse(itemSave));
-console.log(indexSave);
-
-
+  //mise à jour du localStorage en terme de quantité
+  var cartSave = JSON.parse(localStorage.getItem(itemSave));
+  console.log(cartSave);
+  console.log(cartSave.quantity);
+  
+  cartSave.quantity += (parseInt(formQty) - cartSave.quantity);
+  console.log(cartSave.quantity);
+  /*
+  localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
+  //mise à jour du Cart en terme de quantité
+  let indexSave = Cart.findIndex(
+    (x) => x.productIndex === JSON.parse(itemSave)
+  );
+  console.log(indexSave);
+  */
 }
-*/
 
 // double fonction d'appel de donnée de le localStorage et d'injection
 function getData() {
