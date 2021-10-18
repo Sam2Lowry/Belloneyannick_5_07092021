@@ -97,7 +97,6 @@ function saveData() {
   console.log(cartSave.quantity);
   localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
   Cart.splice(index, 1, cartSave);
-
   itemPriceIndividual.textContent = `${formatter.format(
     cartSave.price * cartSave.quantity
   )}`;
@@ -212,14 +211,6 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
-
-/*
-//Test de validité du formulatire par un reportValidity()
-buttonPurchase.addEventListener("click", function () {
-  var isValid = document.querySelector("#purchaseForm").reportValidity();
-});
-*/
-
 /*
 const validityCheck = () => {
   buttonPurchase.addEventListener("click", function () {
@@ -239,3 +230,15 @@ buttonPurchase.addEventListener("click", async => {
 }
   });
 */
+
+const postPurchase = async (data) => {
+  let request = await fetch(apiPost, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  let responseData = await request.json();
+  sessionStorage.setItem('receipt', [responseData.orderId, totalCart]);
+};

@@ -66,3 +66,8 @@ const content = `<div
         alert(element.closest(".glubiTest").id);
       });
     }
+
+    //Test de validité du formulatire par un reportValidity()
+buttonPurchase.addEventListener("click", function () {
+  var isValid = document.querySelector("#purchaseForm").reportValidity();
+});
