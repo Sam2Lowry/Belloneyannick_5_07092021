@@ -210,7 +210,7 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
-
+// Fonction d'exportation des données vers le Back-end
 function exportData() {
   document.getElementById("exportData").addEventListener("click", () => {
     console.log("TEST TEST TEST TEST TEST TEST TEST");
@@ -221,17 +221,25 @@ function exportData() {
       console.log(isValid);
     };
 
-    buttonPurchase.addEventListener("click", (async) => {
+    buttonPurchase.addEventListener("click", () => {
       console.log("test");
       let validation = validityCheck();
       if (validation === true) {
         let cameraIds = Cart.map((a) => a.idModel);
+         postPurchase({
+          contact: {
+            firstName: firstNameInput.value,
+            lastName: lastNameInput.value,
+            address: addressInput.value,
+            city: cityInput.value,
+            email: emailInput.value,
+          },
+          products: cameraIds,
+        });
       }
     });
   });
 }
-
-
 
 const postPurchase = async (data) => {
   let request = await fetch(apiPost, {
