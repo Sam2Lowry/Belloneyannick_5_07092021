@@ -1,8 +1,10 @@
 /*jshint esversion: 9 */
-//Définition des constantes 
+//Définition des constantes
 const Cart = [];
 var clickMinusId;
 var clickPlusId;
+var itemQty;
+var itemPriceIndividual;
 //constante de formatage des valeures numériques de monnaies
 const formatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -21,7 +23,6 @@ const emailInput = document.getElementById("formEmail");
 const addressInput = document.getElementById("formAddress");
 const cityInput = document.getElementById("formCity");
 
-
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
@@ -36,8 +37,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
       return;
     }
+
     clickPlusId = element.closest(".glubiTest").id;
+    itemQtyGroup = element.closest(".input-group");
+    itemQty = itemQtyGroup.querySelector(".formQty").value;
+    itemPriceIndividualGroup = element.closest(".glubiTest");
+    itemPriceIndividual =
+      itemPriceIndividualGroup.querySelector(".showPriceItem");
+    console.log(itemQtyGroup);
+    console.log(itemQty);
     console.log(clickPlusId);
+    console.log(itemPriceIndividual);
     saveData();
   });
 
@@ -53,9 +63,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     deleteData();
   });
 });
-
-
-
 
 function deleteData() {
   var itemSupp = JSON.stringify(clickMinusId);
@@ -74,7 +81,7 @@ function deleteData() {
 
 function saveData() {
   var itemSave = JSON.stringify(clickPlusId);
-  var formQty = document.getElementById("form_Qty").value;
+  var formQty = itemQty;
   console.log(itemSave);
   console.log(formQty);
 
@@ -90,9 +97,11 @@ function saveData() {
   console.log(cartSave.quantity);
   localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
   Cart.splice(index, 1, cartSave);
-  document.getElementById("showPriceItem").textContent = `${formatter.format(
+
+  itemPriceIndividual.textContent = `${formatter.format(
     cartSave.price * cartSave.quantity
   )}`;
+
   updateCartTotal();
 }
 
@@ -147,18 +156,18 @@ function loadCart() {
           </div>
         </div>
       </div>
-      <div class="d-flex flex-row align-items-center qty">
+      <div class="d-flex flex-row align-items-center qty priceGroup">
       <div class="input-group w-50">
               <button class="input-group-text btn-qty" >
               <i class="bi bi-basket3-fill fa-lg"  ></i>
               </button>
-              <input type="number" id="form_Qty" class="form-control" placeholder="0" value="${
+              <input type="number" class="form-control formQty" placeholder="0" value="${
                 item.quantity
               }" min="1" max="100" aria-label="quantité">
             </div>
       </div>
       <div class="d-flex flex-row">
-        <h5 class="text-grey mx-auto price-tag" id="showPriceItem">${formatter.format(
+        <h5 class="text-grey mx-auto price-tag showPriceItem">${formatter.format(
           item.price * item.quantity
         )}</h5>
       </div>
