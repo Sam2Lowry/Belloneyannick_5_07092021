@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   getData();
 
   //event listeners buttons
-
   // --> bouton rajouter
 
   document.addEventListener("click", (e) => {
@@ -211,25 +210,28 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
-/*
-const validityCheck = () => {
-  buttonPurchase.addEventListener("click", function () {
-    var isValid = document.querySelector("#purchaseForm").reportValidity();
-    return isValid;
+
+function exportData() {
+  document.getElementById("exportData").addEventListener("click", () => {
+    console.log("TEST TEST TEST TEST TEST TEST TEST");
+    const validityCheck = () => {
+      buttonPurchase.addEventListener("click", function () {
+        document.querySelector("#purchaseForm").reportValidity();
+      });
+      console.log(isValid);
+    };
+
+    buttonPurchase.addEventListener("click", (async) => {
+      console.log("test");
+      let validation = validityCheck();
+      if (validation === true) {
+        let cameraIds = Cart.map((a) => a.idModel);
+      }
+    });
   });
-  console.log(isValid);
-};
-
-buttonPurchase.addEventListener("click", async => {
-  console.log('test');
-  let validation = validityCheck();
-  if (validation === true) {
-  let cameraIds = Cart.map(a => a.idModel);
-
-
 }
-  });
-*/
+
+
 
 const postPurchase = async (data) => {
   let request = await fetch(apiPost, {
@@ -240,5 +242,5 @@ const postPurchase = async (data) => {
     body: JSON.stringify(data),
   });
   let responseData = await request.json();
-  sessionStorage.setItem('receipt', [responseData.orderId, totalCart]);
+  sessionStorage.setItem("receipt", [responseData.orderId, totalCart]);
 };
