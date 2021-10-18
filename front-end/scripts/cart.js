@@ -1,12 +1,34 @@
 /*jshint esversion: 9 */
+//Définition des constantes 
+const Cart = [];
+var clickMinusId;
+var clickPlusId;
+//constante de formatage des valeures numériques de monnaies
+const formatter = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  currencyDisplay: "symbol",
+});
+
+// URL de l'api
+const apiPost = "http://localhost:3000/api/cameras/order/";
+// Formulaire ref.
+const buttonPurchase = document.getElementById("exportData");
+const form = document.getElementById("purchaseForm");
+const lastNameInput = document.getElementById("formLastName");
+const firstNameInput = document.getElementById("formFirstName");
+const emailInput = document.getElementById("formEmail");
+const addressInput = document.getElementById("formAddress");
+const cityInput = document.getElementById("formCity");
+
 
 //Une fois le dom chargé alors, éxécution du décompte panier
-
 document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
   getData();
 
   //event listeners buttons
+
   // --> bouton rajouter
 
   document.addEventListener("click", (e) => {
@@ -32,16 +54,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 
-// Chargement en mémoire du locale Storage
-const Cart = [];
-var clickMinusId;
-var clickPlusId;
-//constante de formatage des valeures numériques de monnaies
-const formatter = new Intl.NumberFormat("fr-FR", {
-  style: "currency",
-  currency: "EUR",
-  currencyDisplay: "symbol",
-});
+
+
 
 function deleteData() {
   var itemSupp = JSON.stringify(clickMinusId);
@@ -189,3 +203,30 @@ function cartToken() {
     ).textContent = `Panier (${cartCounter})`;
   }
 }
+
+/*
+//Test de validité du formulatire par un reportValidity()
+buttonPurchase.addEventListener("click", function () {
+  var isValid = document.querySelector("#purchaseForm").reportValidity();
+});
+*/
+
+/*
+const validityCheck = () => {
+  buttonPurchase.addEventListener("click", function () {
+    var isValid = document.querySelector("#purchaseForm").reportValidity();
+    return isValid;
+  });
+  console.log(isValid);
+};
+
+buttonPurchase.addEventListener("click", async => {
+  console.log('test');
+  let validation = validityCheck();
+  if (validation === true) {
+  let cameraIds = Cart.map(a => a.idModel);
+
+
+}
+  });
+*/

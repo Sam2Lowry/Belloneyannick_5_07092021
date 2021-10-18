@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="#" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="scripts/cart.js"></script>
     <title>Orinoco</title>
@@ -22,7 +34,12 @@
       <div class="container">
         <a href="index.html" class="navbar-brand">Orinoco</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -43,7 +60,10 @@
     </nav>
 
     <!-- Hero section -->
-    <section id="hero" class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+    <section
+      id="hero"
+      class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start"
+    >
       <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between">
           <div>
@@ -58,7 +78,11 @@
               illo quidem suscipit.
             </p>
           </div>
-          <img class="img-fluid w-50 d-none d-sm-block" src="img/handcam.png" alt="" />
+          <img
+            class="img-fluid w-50 d-none d-sm-block"
+            src="img/handcam.png"
+            alt=""
+          />
         </div>
       </div>
     </section>
@@ -71,15 +95,21 @@
           <div class="p-2" id="cartList"></div>
 
           <!-- Fin de la div panier -->
-         
-          <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
+
+          <div
+            class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"
+          >
             <div class="container">
-              <p id="totalPrice" class="h3">Prix total : </p>
+              <p id="totalPrice" class="h3">Prix total :</p>
               <p>Tous nos prix sont TTC</p>
             </div>
-            
 
-            <button class="btn btn-warning btn-block btn-lg ml-2 pay-button" data-bs-toggle="modal" data-bs-target="#Purchase" type="button">
+            <button
+              class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+              data-bs-toggle="modal"
+              data-bs-target="#Purchase"
+              type="button"
+            >
               Procéder à la commande
             </button>
           </div>
@@ -106,67 +136,102 @@
       </div>
     </footer>
     <div
-    class="modal fade"
-    id="Purchase"
-    tabindex="-1"
-    aria-labelledby="enrollLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="enrollLabel">Commander</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p class="lead">Veuillez remplir le formulaire pour valider votre commande</p>
-          <form>
-            <div class="mb-3">
-              <label for="first-name" class="col-form-label">
-                Prénom :
-              </label>
-              <input type="text" class="form-control" id="first-name" />
-            </div>
-            <div class="mb-3">
-              <label for="last-name" class="col-form-label">Nom :</label>
-              <input type="text" class="form-control" id="last-name" />
-            </div>
-            <div class="mb-3">
-              <label for="email" class="col-form-label">Email :</label>
-              <input type="email" class="form-control" id="email" />
-            </div>
-            <div class="mb-3">
-              <label for="address" class="col-form-label">Adresse :</label>
-              <input type="text" class="form-control" id="address" />
-            </div>
-            <div class="mb-3">
-              <label for="city" class="col-form-label">Ville :</label>
-              <input type="text" class="form-control" id="city" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Submit</button>
+      class="modal fade"
+      id="Purchase"
+      tabindex="-1"
+      aria-labelledby="purchaseLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="purchaseLabel">Commander</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="lead">
+              Veuillez remplir le formulaire pour valider votre commande
+            </p>
+            <form>
+              <div class="mb-3" id="purchaseForm">
+                <label for="first-name" class="col-form-label" id="formFirstName">
+                  Prénom :
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first-name"
+                  pattern="^([ \u00c0-\u01ffa-zA-Z'])+$"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="last-name" class="col-form-label" id="formLastName">Nom :</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last-name"
+                  pattern="^([ \u00c0-\u01ffa-zA-Z'])+$"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="col-form-label" id="formEmail">Email :</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="address" class="col-form-label" id="formAddress">Adresse :</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  pattern="^[a-zA-Z0-9\s,.'-]{3,}$"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="city" class="col-form-label" id="formCity">Ville :</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pattern="^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$"
+                  id="city"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fermer
+            </button>
+            <button type="button" class="btn btn-warning" id="exportData">
+              Commander
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-    </script>
-  </body>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
