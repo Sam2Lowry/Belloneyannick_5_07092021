@@ -17,6 +17,9 @@ const buttonPurchase = document.getElementById("exportData");
 const form = document.getElementById("purchaseForm");
 const lastNameInput = document.getElementById("formLastName");
 const firstNameInput = document.getElementById("formFirstName");
+const emailInput = document.getElementById("formEmail");
+const addressInput = document.getElementById("formAddress");
+const cityInput = document.getElementById("formCity");
 
 
 //Une fois le dom chargé alors, éxécution du décompte panier
