@@ -14,15 +14,6 @@ const formatter = new Intl.NumberFormat("fr-FR", {
 
 // URL de l'api
 const apiPost = "http://localhost:3000/api/cameras/order/";
-// Formulaire ref.
-
-const buttonPurchase = document.getElementById("exportData");
-const form = document.getElementById("purchaseForm");
-const lastNameInput = document.getElementById("formLastName");
-const firstNameInput = document.getElementById("formFirstName");
-const emailInput = document.getElementById("formEmail");
-const addressInput = document.getElementById("formAddress");
-const cityInput = document.getElementById("formCity");
 
 
 //Une fois le dom chargé alors, éxécution du décompte panier
@@ -39,7 +30,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     isValid = document.querySelector("#purchaseForm").reportValidity();
     console.log(isValid);
     exportData();
-    
+
   });
   // --> bouton rajouter
   document.addEventListener("click", (e) => {
@@ -228,30 +219,35 @@ function cartToken() {
 function exportData() {
   if (isValid === true) {
     let cameraIds = Cart.map((a) => a.idModel);
-    postPurchase({
+    //création de l'objet à envoyer
+    console.log(cameraIds)
+    let test = {
       contact: {
-        firstName: firstNameInput.value,
-        lastName: lastNameInput.value,
-        address: addressInput.value,
-        city: cityInput.value,
-        email: emailInput.value,
+        firstName: document.querySelector("#formFirstName").value,
+        lastName: document.querySelector("#formLastName").value,
+        address: document.querySelector("#formAddress").value,
+        city: document.querySelector("#formCity").value,
+        email: document.querySelector("#formEmail").value,
       },
       products: cameraIds,
-    });
-  }
-}
+    }
+    console.log(test);
 
-const postPurchase = async (data) => {
-  let request = await fetch(apiPost, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  let responseData = await request.json();
-  sessionStorage.setItem("receipt", {
-    id: responseData.orderId,
-    totalPrice: totalCart
-  });
-};
+    //postPurchase({});
+  }
+
+  const postPurchase = async (data) => {
+    let request = await fetch(apiPost, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let responseData = await request.json();
+    sessionStorage.setItem("receipt", {
+      id: responseData.orderId,
+      totalPrice: totalCart
+    });
+  };
+}
