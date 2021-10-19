@@ -238,21 +238,19 @@ function exportData() {
       products,
     };
     console.log(data)
-  }
- 
- 
-  
+  } 
 }
 /*
-Purchase = async (data) => {
-  let request = await fetch(apiPost, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  let responseData = await request.json();
-  console.log(responseData);
+fetch(apiPost, {
+  method: "post",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
 
-}; */
+  //make sure to serialize your JSON body
+  body: JSON.stringify(data)
+})
+.then( (response) => { 
+   console.log(response)
+}); */
