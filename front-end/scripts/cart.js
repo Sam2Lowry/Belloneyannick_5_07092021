@@ -15,6 +15,7 @@ const formatter = new Intl.NumberFormat("fr-FR", {
 // URL de l'api
 const apiPost = "http://localhost:3000/api/cameras/order/";
 // Formulaire ref.
+
 const buttonPurchase = document.getElementById("exportData");
 const form = document.getElementById("purchaseForm");
 const lastNameInput = document.getElementById("formLastName");
@@ -23,15 +24,24 @@ const emailInput = document.getElementById("formEmail");
 const addressInput = document.getElementById("formAddress");
 const cityInput = document.getElementById("formCity");
 
+
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
   getData();
 
   //event listeners buttons
+  //bouton de validation du formulaire
 
+
+  document.querySelector("#exportData").addEventListener("click", () => {
+    console.log('test test test');
+    isValid = document.querySelector("#purchaseForm").reportValidity();
+    console.log(isValid);
+    exportData();
+    
+  });
   // --> bouton rajouter
-
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
@@ -97,7 +107,6 @@ function saveData() {
   console.log(cartSave.quantity);
   localStorage.setItem(`${itemSave}`, JSON.stringify(cartSave));
   Cart.splice(index, 1, cartSave);
-
   itemPriceIndividual.textContent = `${formatter.format(
     cartSave.price * cartSave.quantity
   )}`;
@@ -157,7 +166,7 @@ function loadCart() {
         </div>
       </div>
       <div class="d-flex flex-row align-items-center qty priceGroup">
-      <div class="input-group w-50">
+      <div class="input-group w-75">
               <button class="input-group-text btn-qty" >
               <i class="bi bi-basket3-fill fa-lg"  ></i>
               </button>
@@ -213,29 +222,36 @@ function cartToken() {
   }
 }
 
-/*
-//Test de validité du formulatire par un reportValidity()
-buttonPurchase.addEventListener("click", function () {
-  var isValid = document.querySelector("#purchaseForm").reportValidity();
-});
-*/
-
-/*
-const validityCheck = () => {
-  buttonPurchase.addEventListener("click", function () {
-    var isValid = document.querySelector("#purchaseForm").reportValidity();
-    return isValid;
-  });
-  console.log(isValid);
-};
-
-buttonPurchase.addEventListener("click", async => {
-  console.log('test');
-  let validation = validityCheck();
-  if (validation === true) {
-  let cameraIds = Cart.map(a => a.idModel);
 
 
+// Fonction d'exportation des données vers le Back-end
+function exportData() {
+  if (isValid === true) {
+    let cameraIds = Cart.map((a) => a.idModel);
+    postPurchase({
+      contact: {
+        firstName: firstNameInput.value,
+        lastName: lastNameInput.value,
+        address: addressInput.value,
+        city: cityInput.value,
+        email: emailInput.value,
+      },
+      products: cameraIds,
+    });
+  }
 }
+
+const postPurchase = async (data) => {
+  let request = await fetch(apiPost, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
-*/
+  let responseData = await request.json();
+  sessionStorage.setItem("receipt", {
+    id: responseData.orderId,
+    totalPrice: totalCart
+  });
+};
