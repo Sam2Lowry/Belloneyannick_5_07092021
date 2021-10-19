@@ -238,19 +238,18 @@ function exportData() {
       products,
     };
     console.log(data)
+    fetch(apiPost, {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    
+      //make sure to serialize your JSON body
+      body: JSON.stringify(data)
+    })
+    .then( (response) => { 
+       console.log(response)
+    }); 
   } 
 }
-/*
-fetch(apiPost, {
-  method: "post",
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-
-  //make sure to serialize your JSON body
-  body: JSON.stringify(data)
-})
-.then( (response) => { 
-   console.log(response)
-}); */
