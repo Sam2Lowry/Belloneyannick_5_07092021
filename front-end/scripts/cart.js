@@ -1,10 +1,12 @@
 /*jshint esversion: 9 */
 //Définition des constantes
 const Cart = [];
+const dataTicket = {};
 var clickMinusId;
 var clickPlusId;
 var itemQty;
 var itemPriceIndividual;
+
 //constante de formatage des valeures numériques de monnaies
 const formatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -221,33 +223,36 @@ function exportData() {
     let cameraIds = Cart.map((a) => a.idModel);
     //création de l'objet à envoyer
     console.log(cameraIds)
-    let test = {
-      contact: {
-        firstName: document.querySelector("#formFirstName").value,
-        lastName: document.querySelector("#formLastName").value,
-        address: document.querySelector("#formAddress").value,
-        city: document.querySelector("#formCity").value,
-        email: document.querySelector("#formEmail").value,
-      },
-      products: cameraIds,
+    const contact = {
+      "firstName": document.querySelector("#formFirstName").value,
+      "lastName": document.querySelector("#formLastName").value,
+      "address": document.querySelector("#formAddress").value,
+      "city": document.querySelector("#formCity").value,
+      "email": document.querySelector("#formEmail").value
     }
-    console.log(test);
-
-    //postPurchase({});
+    const products = cameraIds
+    console.log(contact)
+    console.log(products)
+    const data = {
+      contact,
+      products,
+    };
+    console.log(data)
   }
-
-  const postPurchase = async (data) => {
-    let request = await fetch(apiPost, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    let responseData = await request.json();
-    sessionStorage.setItem("receipt", {
-      id: responseData.orderId,
-      totalPrice: totalCart
-    });
-  };
+ 
+ 
+  
 }
+/*
+Purchase = async (data) => {
+  let request = await fetch(apiPost, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  let responseData = await request.json();
+  console.log(responseData);
+
+}; */
