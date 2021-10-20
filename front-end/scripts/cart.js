@@ -1,10 +1,13 @@
 /*jshint esversion: 9 */
 //Définition des constantes
 const Cart = [];
+const dataTicket = {};
+var sumPrices;
 var clickMinusId;
 var clickPlusId;
 var itemQty;
 var itemPriceIndividual;
+
 //constante de formatage des valeures numériques de monnaies
 const formatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -14,15 +17,6 @@ const formatter = new Intl.NumberFormat("fr-FR", {
 
 // URL de l'api
 const apiPost = "http://localhost:3000/api/cameras/order/";
-// Formulaire ref.
-
-const buttonPurchase = document.getElementById("exportData");
-const form = document.getElementById("purchaseForm");
-const lastNameInput = document.getElementById("formLastName");
-const firstNameInput = document.getElementById("formFirstName");
-const emailInput = document.getElementById("formEmail");
-const addressInput = document.getElementById("formAddress");
-const cityInput = document.getElementById("formCity");
 
 
 //Une fois le dom chargé alors, éxécution du décompte panier
@@ -39,7 +33,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     isValid = document.querySelector("#purchaseForm").reportValidity();
     console.log(isValid);
     exportData();
-    
+
   });
   // --> bouton rajouter
   document.addEventListener("click", (e) => {
@@ -198,14 +192,12 @@ function updateCartTotal() {
     cartPrices.push(item.quantity * item.price);
   });
   const reducer = (acc, cur) => acc + cur;
-  const totalPrice = cartPrices.reduce(reducer, 0);
-  console.log(totalPrice);
-
-  //Prix hors boucle
-  console.log(totalPrice);
+  sumPrices = cartPrices.reduce(reducer, 0);
+  console.log(sumPrices);
   document.getElementById(
     "totalPrice"
-  ).textContent = `Prix total : ${formatter.format(totalPrice)}`;
+  ).textContent = `Prix total : ${formatter.format(sumPrices)}`;
+  console.log(cartPrices);
 }
 
 //Fonction de décompte des items dans le localStorage
@@ -223,35 +215,60 @@ function cartToken() {
 }
 
 
-
 // Fonction d'exportation des données vers le Back-end
 function exportData() {
-  if (isValid === true) {
+  if (isValid === true && localStorage.length !== 0) {
     let cameraIds = Cart.map((a) => a.idModel);
-    postPurchase({
-      contact: {
-        firstName: firstNameInput.value,
-        lastName: lastNameInput.value,
-        address: addressInput.value,
-        city: cityInput.value,
-        email: emailInput.value,
-      },
-      products: cameraIds,
-    });
+    //création de l'objet à envoyer
+    console.log(cameraIds)
+    const contact = {
+      "firstName": document.querySelector("#formFirstName").value,
+      "lastName": document.querySelector("#formLastName").value,
+      "address": document.querySelector("#formAddress").value,
+      "city": document.querySelector("#formCity").value,
+      "email": document.querySelector("#formEmail").value
+    }
+    const products = cameraIds
+    console.log(contact)
+    console.log(products)
+    const data = {
+      contact,
+      products,
+    };
+    console.log(data)
+    fetch(apiPost, {
+        method: "post",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+
+        //make sure to serialize your JSON body
+        body: JSON.stringify(data)
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.status)
+
+      })
+      .then(function (response) {
+        console.log(response)
+        console.log(sumPrices)
+        sessionStorage.setItem('purchaseId', response.orderId)
+        sessionStorage.setItem('purchasePrice', sumPrices)
+        localStorage.clear();
+        window.location.href = "confirm.html";
+
+      })
+
+      .catch((error) => {
+        console.log(error)
+
+      });
+  }
+  else{
+    alert("Votre panier est vide");
   }
 }
-
-const postPurchase = async (data) => {
-  let request = await fetch(apiPost, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  let responseData = await request.json();
-  sessionStorage.setItem("receipt", {
-    id: responseData.orderId,
-    totalPrice: totalCart
-  });
-};

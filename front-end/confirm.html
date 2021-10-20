@@ -1,121 +1,88 @@
 <!DOCTYPE html>
 <html lang="zxx">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="#" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <script src="scripts/cart.js"></script>
-    <title>Orinoco</title>
-  </head>
 
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
-      <div class="container">
-        <a href="index.html" class="navbar-brand">Orinoco</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="#" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="scripts/cartToken.js" defer></script>
+  <script src="scripts/confirm.js" defer></script>
+  <title>Orinoco</title>
+</head>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navmenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Orinoco</a>
 
-        <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a href="#hero" class="nav-link">Nos services</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a href="#product" class="nav-link">Votre séléction</a>
-            </li> -->
-            <li class="nav-item">
-              <a href="cart.html" id="tokenCount" class="nav-link">Panier</a>
-            </li>
-          </ul>
-        </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="#hero" class="nav-link">Nos services</a>
+          </li>
+          <li class="nav-item">
+            <a href="cart.html" id="tokenCount" class="nav-link">Panier</a>
+          </li>
+        </ul>
       </div>
-    </nav>
-
-    <!-- Hero section -->
-    <section
-      id="hero"
-      class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start"
-    >
-      <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between">
-          <div>
-            <h1>
-              Recevez
-              <span class="text-warning"> l'appareil photo de vos rêves </span>
-            </h1>
-            <p class="lead my-4">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Asperiores, reprehenderit itaque! Earum sunt incidunt assumenda,
-              illum veritatis vitae tempore amet totam nesciunt laudantium rerum
-              illo quidem suscipit.
-            </p>
-          </div>
-          <img
-            class="img-fluid w-50 d-none d-sm-block"
-            src="img/purchase_tree.png"
-            alt=""
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Le panier-->
-
-    <div class="container mt-5 mb-5">
-      
     </div>
+  </nav>
 
-    <!-- Footer -->
-    <footer class="p-5 bg-dark text-white text-center position-relative">
-      <div class="container">
-        <p class="lead" id="copyDate">
-          <script>
-            document
-              .getElementById("copyDate")
-              .appendChild(document.createTextNode(new Date().getFullYear()));
-          </script>
-
-          &copy; Orinoco
-        </p>
-
-        <a href="#" class="position-absolute bottom-0 end-0 p-5 text-light">
-          <i class="bi bi-arrow-up-circle h1"></i>
-        </a>
+  <!-- Hero section -->
+  <section id="hero" class="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+    <div class="container">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <div>
+          <h1>
+            Recevez
+            <span class="text-warning"> l'appareil photo de vos rêves </span>
+          </h1>
+          <p class="lead my-4" id="heroThanks">
+            Votre commande a bien été enregistré ! <br>
+            Veuillez trouver ci-joint le code d'enregistrement de celle-ci ainsi que le montant total : <br>
+            <p class="lead my-4" id="commandId"></p> <br>
+            <p class="lead my-4" id="commandPrice"></p>
+          </p>
+        </div>
+        <img class="img-fluid w-50 d-none d-sm-block" src="img/purchase_tree.png" alt="" />
       </div>
-    </footer>
+    </div>
+  </section>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <!-- Footer -->
+  <footer class="p-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+      <p class="lead" id="copyDate">
+        <script>
+          document
+            .getElementById("copyDate")
+            .appendChild(document.createTextNode(new Date().getFullYear()));
+        </script>
+
+        &copy; Orinoco
+      </p>
+
+      <a href="#" class="position-absolute bottom-0 end-0 p-5 text-light">
+        <i class="bi bi-arrow-up-circle h1"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+  </script>
+</body>
+
 </html>
