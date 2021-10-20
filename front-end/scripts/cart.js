@@ -257,7 +257,7 @@ function exportData() {
         console.log(response)
         console.log(sumPrices)
         sessionStorage.setItem('purchaseId', response.orderId)
-        sessionStorage.setItem('PurchasePrice', sumPrices)
+        sessionStorage.setItem('purchasePrice', sumPrices)
         localStorage.clear();
         window.location.href = "confirm.html";
 
