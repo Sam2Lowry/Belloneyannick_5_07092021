@@ -2,6 +2,7 @@
 //Définition des constantes
 const Cart = [];
 const dataTicket = {};
+var sumPrices;
 var clickMinusId;
 var clickPlusId;
 var itemQty;
@@ -191,14 +192,12 @@ function updateCartTotal() {
     cartPrices.push(item.quantity * item.price);
   });
   const reducer = (acc, cur) => acc + cur;
-  const totalPrice = cartPrices.reduce(reducer, 0);
-  console.log(totalPrice);
-
-  //Prix hors boucle
-  console.log(totalPrice);
+  sumPrices = cartPrices.reduce(reducer, 0);
+  console.log(sumPrices);
   document.getElementById(
     "totalPrice"
-  ).textContent = `Prix total : ${formatter.format(totalPrice)}`;
+  ).textContent = `Prix total : ${formatter.format(sumPrices)}`;
+  console.log(cartPrices);
 }
 
 //Fonction de décompte des items dans le localStorage
@@ -216,10 +215,9 @@ function cartToken() {
 }
 
 
-
 // Fonction d'exportation des données vers le Back-end
 function exportData() {
-  if (isValid === true) {
+  if (isValid === true && localStorage.length !== 0) {
     let cameraIds = Cart.map((a) => a.idModel);
     //création de l'objet à envoyer
     console.log(cameraIds)
@@ -239,19 +237,38 @@ function exportData() {
     };
     console.log(data)
     fetch(apiPost, {
-      method: "post",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    
-      //make sure to serialize your JSON body
-      body: JSON.stringify(data)
-    })
-    .then( (response) => { 
-       console.log(response)
-    }) 
-    .catch((error) => {console.log(error)
-    });
-  } 
+        method: "post",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+
+        //make sure to serialize your JSON body
+        body: JSON.stringify(data)
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.status)
+
+      })
+      .then(function (response) {
+        console.log(response)
+        console.log(sumPrices)
+        sessionStorage.setItem('purchaseId', response.orderId)
+        sessionStorage.setItem('PurchasePrice', sumPrices)
+        localStorage.clear();
+        window.location.href = "confirm.html";
+
+      })
+
+      .catch((error) => {
+        console.log(error)
+
+      });
+  }
+  else{
+    alert("Votre panier est vide");
+  }
 }

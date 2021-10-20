@@ -166,6 +166,8 @@
                   type="text"
                   class="form-control"
                   id="formFirstName"
+                  minlength="2"
+                  maxlength="30"
                   pattern="^([ \u00c0-\u01ffa-zA-Z'])+$"
                   required
                 />
@@ -176,6 +178,8 @@
                   type="text"
                   class="form-control"
                   id="formLastName"
+                  minlength="2"
+                  maxlength="30"
                   pattern="^([ \u00c0-\u01ffa-zA-Z'])+$"
                   required
                 />
@@ -186,6 +190,8 @@
                   type="email"
                   class="form-control"
                   id="formEmail"
+                  minlength="2"
+                  maxlength="80"
                   pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
                   required
                 />
@@ -196,6 +202,8 @@
                   type="text"
                   class="form-control"
                   id="formAddress"
+                  minlength="2"
+                  maxlength="80"
                   pattern="^[a-zA-Z0-9\s,.'-]{3,}$"
                   required
                 />
@@ -205,6 +213,8 @@
                 <input
                   type="text"
                   class="form-control"
+                  minlength="2"
+                  maxlength="30"
                   pattern="^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$"
                   id="formCity"
                   required
