@@ -1,8 +1,14 @@
 /*jshint esversion: 9 */
+//Event listeners
+window.addEventListener("DOMContentLoaded", () => {
+  Purchase();
+  loadData();
+  toast();
+  cartToken();
+});
+
 // Variables et constantes
 const stockCameras = "http://localhost:3000/api/cameras";
-
-eventListeners();
 
 //Classe de stockage du produit
 class Product {
@@ -17,15 +23,8 @@ class Product {
   }
 }
 
-//Event listeners
-function eventListeners() {
-  window.addEventListener("DOMContentLoaded", () => {
-    Purchase();
-    loadData();
-    toast();
-    cartToken();
-  });
-}
+
+
 
 // Fonction d'exploration des data URL
 function getParameter(parameterName) {
