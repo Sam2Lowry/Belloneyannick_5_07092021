@@ -150,7 +150,7 @@ function loadCart() {
           width="70"
         />
       </div>
-      <div class="d-flex flex-column align-items-center product-details">
+      <div class="d-flex flex-column flex-grow-1 align-items-center product-details">
         <span class="font-weight-bold ">${item.model}</span>
         <div class="d-flex flex-row product-desc">
           <div class="focale mr-1">
@@ -174,7 +174,7 @@ function loadCart() {
           item.price * item.quantity
         )}</h5>
       </div>
-      <div class="d-flex align-items-center  btn-supp" >
+      <div class="d-flex align-items-center mx-1  btn-supp" >
         <i class="fa fa-trash mb-1 text-danger " ></i>
       </div>
     </div>`;
