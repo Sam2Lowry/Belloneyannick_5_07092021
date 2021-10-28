@@ -163,7 +163,7 @@ function loadCart() {
           width="70"
         />
       </div>
-      <div class="d-flex flex-column flex-grow-1 align-items-center product-details">
+      <div class="d-flex  flex-column align-items-center product-details">
         <span class="font-weight-bold ">${item.model}</span>
         <div class="d-flex flex-row product-desc">
           <div class="focale mr-1">
@@ -182,7 +182,7 @@ function loadCart() {
             </div>
       </div>
       <div class="d-flex flex-row">
-        <h5 class="text-grey mx-auto price-tag showPriceItem">${formatter.format(
+        <h5 class="text-grey price-tag showPriceItem">${formatter.format(
           item.price * item.quantity
         )}</h5>
       </div>
