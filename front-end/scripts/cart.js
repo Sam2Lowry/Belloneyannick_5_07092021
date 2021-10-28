@@ -32,9 +32,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     console.log('test test test');
     isValid = document.querySelector("#purchaseForm").reportValidity();
     console.log(isValid);
-    exportData();
-
+    exportData()
   });
+  
+  const buttonPaymentCheck = () => {
+    if (Cart.length !== 0) {
+
+      document.getElementById("pay-button").disabled = false;
+
+    } else {
+
+      document.getElementById("pay-button").disabled = true;
+    }
+}
+buttonPaymentCheck()
+
   // --> bouton rajouter
   document.addEventListener("click", (e) => {
     var element = e.target;
@@ -65,6 +77,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     clickMinusId = element.closest(".glubiTest").id;
     console.log(clickMinusId);
     deleteData();
+    buttonPaymentCheck()
   });
 });
 
@@ -164,9 +177,8 @@ function loadCart() {
               <button class="input-group-text btn-qty" >
               <i class="bi bi-basket3-fill fa-lg"  ></i>
               </button>
-              <input type="number" class="form-control formQty" placeholder="0" value="${
-                item.quantity
-              }" min="1" max="100" aria-label="quantité">
+              <input type="number" class="form-control formQty" placeholder="0" value="${item.quantity
+        }" min="1" max="100" aria-label="quantité">
             </div>
       </div>
       <div class="d-flex flex-row">
@@ -237,15 +249,15 @@ function exportData() {
     };
     console.log(data)
     fetch(apiPost, {
-        method: "post",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
 
-        //make sure to serialize your JSON body
-        body: JSON.stringify(data)
-      })
+      //make sure to serialize your JSON body
+      body: JSON.stringify(data)
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -268,7 +280,8 @@ function exportData() {
 
       });
   }
-  else{
-    alert("Votre panier est vide");
+  else {
+    alert("Veuillez remplir le formulaire");
   }
 }
+

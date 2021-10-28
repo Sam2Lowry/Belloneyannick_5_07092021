@@ -63,3 +63,12 @@ input:invalid {
   border: rgba(255, 0, 0, 0.397) solid 3px;
 }
 
+#commandId {
+  font-weight: bold;
+}
+
+#commandPrice {
+  font-weight: bold;
+  color: #000000 ;
+  text-shadow: rgb(241, 214, 89) 1px 0 10px;
+}
