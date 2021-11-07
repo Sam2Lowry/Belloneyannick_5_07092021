@@ -166,7 +166,7 @@ function loadCart() {
                   "
                   id="${item.model}__${item.lens}"
     >
-      <div class="mr-1">
+      <div class="mr-1 col">
         <img
           class="rounded"
           alt="test"
@@ -174,7 +174,7 @@ function loadCart() {
           width="70"
         />
       </div>
-      <div class="d-flex  flex-column align-items-center product-details">
+      <div class="d-flex flex-column align-items-center product-details col">
         <span class="font-weight-bold ">${item.model}</span>
         <div class="d-flex flex-row product-desc">
           <div class="focale mr-1">
@@ -183,16 +183,16 @@ function loadCart() {
           </div>
         </div>
       </div>
-      <div class="d-flex flex-row align-items-center qty priceGroup">
-      <div class="input-group w-75">
+      <div class="d-flex flex-row align-items-center qty col priceGroup">
+      <div class="input-group w-50">
               <button class="input-group-text btn-qty" >
-              <i class="bi bi-basket3-fill fa-lg"  ></i>
+              <i class="bi bi-basket3-fill fa-lg"></i>
               </button>
               <input type="number" class="form-control formQty" placeholder="0" value="${item.quantity
         }" min="1" max="100" aria-label="quantité">
             </div>
       </div>
-      <div class="d-flex flex-row">
+      <div class="md-mx-5 col d-flex flex-row">
         <h5 class="text-grey price-tag showPriceItem">${formatter.format(
           item.price * item.quantity
         )}</h5>
