@@ -65,6 +65,11 @@ const loadData = async () => {
     console.log(options);
 
     //Boucle for au sein de l'Array des Lenses
+    /*
+    1. First, it creates a new select element and sets its name attribute to “lens”.
+    2. Then, it creates a new option element for each of the options in the array.
+    3. Finally, it appends each option element to the select element.
+    */
     for (var i = 0; i < options.length; i++) {
       var opt = options[i];
       console.log(opt);
@@ -139,8 +144,11 @@ function Purchase() {
     console.log(product);
 
     //Test présence de l'objet dans le locale storage
+    /*
+    1. First, it checks if the product is already in the cart. If it is, it adds the quantity to the existing quantity.
+    2. If the product is not in the cart, it creates a new object and adds the product to the cart.
+    */
     var cartItem = JSON.parse(localStorage.getItem(`"${productIndex}"`));
-
     if (cartItem !== null) {
       console.log("produit dans le panier");
       console.log(cartItem.quantity + " = donnée de l'objet parse from json");
