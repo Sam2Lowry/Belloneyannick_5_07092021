@@ -51,14 +51,14 @@ buttonPaymentCheck()
   document.addEventListener("click", (e) => {
     var element = e.target;
     if (!e.target.matches(".btn-qty, .btn-qty *")) {
-      return;
+      return; // break
     }
 
     clickPlusId = element.closest(".glubiTest").id;
     itemQtyGroup = element.closest(".input-group");
     itemQty = itemQtyGroup.querySelector(".formQty").value;
     itemPriceIndividualGroup = element.closest(".glubiTest");
-    itemPriceIndividual =
+    itemPriceIndividual = 
       itemPriceIndividualGroup.querySelector(".showPriceItem");
     console.log(itemQtyGroup);
     console.log(itemQty);
@@ -79,6 +79,7 @@ buttonPaymentCheck()
     deleteData();
     buttonPaymentCheck()
   });
+
 });
 
 function deleteData() {
@@ -107,6 +108,12 @@ function saveData() {
   console.log(index);
 
   //mise à jour du localStorage en terme de quantité
+  /*
+  1. We’re getting the item from local storage and converting it to a JSON object.
+  2. We’re adding the quantity from the form to the quantity from local storage.
+  3. We’re setting the new quantity to local storage.
+  4. We’re setting the new quantity to the itemPriceIndividual.
+  */
   var cartSave = JSON.parse(localStorage.getItem(itemSave));
   console.log(cartSave);
   console.log(cartSave.quantity);
@@ -121,7 +128,11 @@ function saveData() {
   updateCartTotal();
 }
 
-// double fonction d'appel de donnée de le localStorage et d'injection
+/*
+1. First, it iterates through all the keys in localStorage.
+2. Then, it parses the data from localStorage and pushes it into the Cart array.
+3. Finally, it calls the loadCart function to render the cart.
+*/
 function getData() {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -198,6 +209,15 @@ function loadCart() {
   updateCartTotal();
 }
 
+/*
+It updates the total price of the cart.
+*/
+/*
+1. We create an array of prices for each item in the cart.
+2. We create a reducer function that sums the prices in the array.
+3. We use the reducer function to sum the prices in the array.
+4. We update the total price in the DOM.
+*/
 function updateCartTotal() {
   let cartPrices = [];
   Cart.forEach((item) => {
@@ -255,7 +275,7 @@ function exportData() {
         'Content-Type': 'application/json'
       },
 
-      //make sure to serialize your JSON body
+      //JSon-nify it !
       body: JSON.stringify(data)
     })
       .then((response) => {
@@ -265,6 +285,14 @@ function exportData() {
         throw new Error(response.status)
 
       })
+      /*
+      1. It first gets the response from the server.
+      2. It then checks if the response is a success or not.
+      3. If the response is a success, it gets the orderId from the response and stores it in sessionStorage.
+      4. It then gets the sum of all the prices from the localStorage and stores it in sessionStorage.
+      5. It then clears the localStorage.
+      6. Finally, it redirects the user to the confirm.html page.
+      */
       .then(function (response) {
         console.log(response)
         console.log(sumPrices)
