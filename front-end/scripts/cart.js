@@ -18,7 +18,6 @@ const formatter = new Intl.NumberFormat("fr-FR", {
 // URL de l'api
 const apiPost = "http://localhost:3000/api/cameras/order/";
 
-
 //Une fois le dom chargé alors, éxécution du décompte panier
 document.addEventListener("DOMContentLoaded", (event) => {
   cartToken();
@@ -27,25 +26,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //event listeners buttons
   //bouton de validation du formulaire
 
-
   document.querySelector("#exportData").addEventListener("click", () => {
-    console.log('test test test');
+    console.log("test test test");
     isValid = document.querySelector("#purchaseForm").reportValidity();
     console.log(isValid);
-    exportData()
+    exportData();
   });
-  
+
   const buttonPaymentCheck = () => {
     if (Cart.length !== 0) {
-
       document.getElementById("pay-button").disabled = false;
-
     } else {
-
       document.getElementById("pay-button").disabled = true;
     }
-}
-buttonPaymentCheck()
+  };
+  buttonPaymentCheck();
 
   // --> bouton rajouter
   document.addEventListener("click", (e) => {
@@ -58,7 +53,7 @@ buttonPaymentCheck()
     itemQtyGroup = element.closest(".input-group");
     itemQty = itemQtyGroup.querySelector(".formQty").value;
     itemPriceIndividualGroup = element.closest(".glubiTest");
-    itemPriceIndividual = 
+    itemPriceIndividual =
       itemPriceIndividualGroup.querySelector(".showPriceItem");
     console.log(itemQtyGroup);
     console.log(itemQty);
@@ -77,9 +72,8 @@ buttonPaymentCheck()
     clickMinusId = element.closest(".glubiTest").id;
     console.log(clickMinusId);
     deleteData();
-    buttonPaymentCheck()
+    buttonPaymentCheck();
   });
-
 });
 
 function deleteData() {
@@ -153,7 +147,7 @@ function loadCart() {
     Cart.forEach((item) => {
       const content = `<div
       class="
-                    d-flex
+                    d-lg-flex
                     flex-row
                     justify-content-between
                     align-items-center
@@ -166,12 +160,12 @@ function loadCart() {
                   "
                   id="${item.model}__${item.lens}"
     >
-      <div class="mr-1 col">
+      <div class="mr-1 col text-center col">
         <img
-          class="rounded"
+          class="rounded img-fluid thumbCart"
           alt="test"
           src="${item.imageUrl}"
-          width="70"
+          width="100"
         />
       </div>
       <div class="d-flex flex-column align-items-center product-details col">
@@ -184,21 +178,22 @@ function loadCart() {
         </div>
       </div>
       <div class="d-flex flex-row align-items-center qty col priceGroup">
-      <div class="input-group w-50">
+      <div class="input-group w-75 mx-auto">
               <button class="input-group-text btn-qty" >
               <i class="bi bi-basket3-fill fa-lg"></i>
               </button>
-              <input type="number" class="form-control formQty" placeholder="0" value="${item.quantity
-        }" min="1" max="100" aria-label="quantité">
+              <input type="number" class="form-control formQty" placeholder="0" value="${
+                item.quantity
+              }" min="1" max="100" aria-label="quantité">
             </div>
       </div>
-      <div class="md-mx-5 col d-flex flex-row">
-        <h5 class="text-grey price-tag showPriceItem">${formatter.format(
+      <div class="md-mx-5 col d-flex flex-row ">
+        <h5 class="text-grey price-tag showPriceItem mx-auto">${formatter.format(
           item.price * item.quantity
         )}</h5>
       </div>
       <div class="d-flex align-items-center mx-1  btn-supp" >
-        <i class="fa fa-trash mb-1 text-danger " ></i>
+        <i class="fa fa-trash mb-1 text-danger m" ></i>
       </div>
     </div>`;
 
@@ -246,44 +241,42 @@ function cartToken() {
   }
 }
 
-
 // Fonction d'exportation des données vers le Back-end
 function exportData() {
   if (isValid === true && localStorage.length !== 0) {
     let cameraIds = Cart.map((a) => a.idModel);
     //création de l'objet à envoyer
-    console.log(cameraIds)
+    console.log(cameraIds);
     const contact = {
-      "firstName": document.querySelector("#formFirstName").value,
-      "lastName": document.querySelector("#formLastName").value,
-      "address": document.querySelector("#formAddress").value,
-      "city": document.querySelector("#formCity").value,
-      "email": document.querySelector("#formEmail").value
-    }
-    const products = cameraIds
-    console.log(contact)
-    console.log(products)
+      firstName: document.querySelector("#formFirstName").value,
+      lastName: document.querySelector("#formLastName").value,
+      address: document.querySelector("#formAddress").value,
+      city: document.querySelector("#formCity").value,
+      email: document.querySelector("#formEmail").value,
+    };
+    const products = cameraIds;
+    console.log(contact);
+    console.log(products);
     const data = {
       contact,
       products,
     };
-    console.log(data)
+    console.log(data);
     fetch(apiPost, {
       method: "post",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
 
       //JSon-nify it !
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error(response.status)
-
+        throw new Error(response.status);
       })
       /*
       1. It first gets the response from the server.
@@ -294,22 +287,18 @@ function exportData() {
       6. Finally, it redirects the user to the confirm.html page.
       */
       .then(function (response) {
-        console.log(response)
-        console.log(sumPrices)
-        sessionStorage.setItem('purchaseId', response.orderId)
-        sessionStorage.setItem('purchasePrice', sumPrices)
+        console.log(response);
+        console.log(sumPrices);
+        sessionStorage.setItem("purchaseId", response.orderId);
+        sessionStorage.setItem("purchasePrice", sumPrices);
         localStorage.clear();
         window.location.href = "confirm.html";
-
       })
 
       .catch((error) => {
-        console.log(error)
-
+        console.log(error);
       });
-  }
-  else {
+  } else {
     alert("Veuillez remplir le formulaire");
   }
 }
-
