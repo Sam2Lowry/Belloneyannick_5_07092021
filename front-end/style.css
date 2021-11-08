@@ -1,9 +1,8 @@
 body::before {
   display: block;
-  content: '';
+  content: "";
   height: 60px;
 }
-
 @media (min-width: 768px) {
   .news-input {
     width: 50%;
@@ -11,52 +10,52 @@ body::before {
 }
 
 .size span {
-  font-size: 11px
+  font-size: 11px;
 }
 
 .color span {
-  font-size: 11px
+  font-size: 11px;
 }
 
 .product-deta {
-  margin-right: 70px
+  margin-right: 70px;
 }
 
 .gift-card:focus {
-  box-shadow: none
+  box-shadow: none;
 }
 
 .pay-button {
-  color: #fff
+  color: #fff;
+  margin-bottom: 2rem!important;
 }
 
 .pay-button:hover {
-  color: #fff
+  color: #fff;
 }
 
 .pay-button:focus {
   color: #fff;
-  box-shadow: none
+  box-shadow: none;
 }
 
 .text-grey {
-  color: #a39f9f
+  color: #a39f9f;
 }
 
 .qty i {
-  font-size: 11px
+  font-size: 11px;
 }
 
-
-.btn-qty:hover{
-  color:rgb(22, 155, 22);
-  cursor:pointer;
+.btn-qty:hover {
+  color: rgb(22, 155, 22);
+  cursor: pointer;
 }
 
-.btn-supp:hover{
-  cursor:pointer;
-  transition : opacity 250ms ease;
-  opacity : 0.5;
+.btn-supp:hover {
+  cursor: pointer;
+  transition: opacity 250ms ease;
+  opacity: 0.5;
 }
 
 input:invalid {
@@ -69,6 +68,47 @@ input:invalid {
 
 #commandPrice {
   font-weight: bold;
-  color: #000000 ;
+  color: #000000;
   text-shadow: rgb(149, 230, 133) 1px 0 10px;
+}
+.formQty {
+  max-width: 60px !important;
+  min-width: 55px !important;
+}
+.thumbCart {
+  width: 300px !important;
+}
+
+
+@media screen and (max-width: 995px) {
+  .input-group {
+    margin: auto;
+    justify-content: center;
+  }
+  .formQty {
+    max-width: 60px !important;
+    min-width: 55px !important;
+  }
+  .btn-supp {
+    position: relative;
+    padding-left: 90%;
+    font-size: 1.5rem;
+  }
+  .thumbCart {
+    width: 300px !important;
+  }
+}
+
+html {
+  position: relative!important;
+  min-height: 100%!important;
+}
+body {
+  margin-bottom: 90px!important; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute!important;
+  bottom: 0!important;
+  width: 100%!important;
+  height: 60px!important; /* Set the fixed height of the footer here */
 }
