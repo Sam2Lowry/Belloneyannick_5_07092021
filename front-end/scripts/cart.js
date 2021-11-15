@@ -1,4 +1,3 @@
-/*jshint esversion: 9 */
 //Définition des constantes
 const Cart = [];
 const dataTicket = {};
