@@ -1,4 +1,3 @@
-/*jshint esversion: 9 */
 document.addEventListener("DOMContentLoaded", cartToken);
 /*
 1. The function cartToken() is called when the page loads.

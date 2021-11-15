@@ -1,4 +1,3 @@
-/*jshint esversion: 9 */
 //Event listeners
 window.addEventListener("DOMContentLoaded", () => {
   Purchase();

@@ -15,4 +15,3 @@ function commandThanks() {
         document.getElementById('heroThanks').textContent = "Vous n'avez pas de commande validée en cours";
     }
 }
-
